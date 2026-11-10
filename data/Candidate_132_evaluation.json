@@ -1,0 +1,130 @@
+{
+  "session_metadata": {
+    "candidate_alias": "Candidate_132",
+    "job_id": "JD-AI-7284",
+    "role": "AI Lead Engineer"
+  },
+  "transcript": [
+    {
+      "turn": 1,
+      "speaker": "Kovi AI",
+      "text": "Hi Candidate_132, I am Kovi AI, your AI interviewer today. I'd like to start by hearing about your most recent project where you built something with Python and FastAPI. Can you walk me through what you built, what problem it solved, and which of the technologies from our focus list you actually used in that project?"
+    },
+    {
+      "turn": 2,
+      "speaker": "Candidate",
+      "text": "Actually, I implemented a project named called Gaming Gateway, actually two giant, gaming domains has measured together. And they allow one domain, a galo, one domain has to play that. So other domain games. So that is the requirement for this one, we implemented a system, or Gateway system. And also, actually, we allow actually we change the domain games into the SIR literature. So what are the required information? We will register this request and it will fetch the information. And with that information we allow player to play the games. So that is how the gaming domain has implemented. I mean, gaming gateway has implemented. Now the problem is with the answer to the player queries, the queries can be of any type. which can be related to the valid information. It can be related to the game blocks or game information or user profiles information. Otherwise, the game related queries like what is a minimum, that how many place will play? What are the vending chances of the game or like that? So all these kinds of information, the user can able to raise any kind of information. So we implemented a system, land graph application with the first API and the vector database to resolve this problem. And we use it as a LMMO open as the LMM for this one. So I think I covered most of the technologies that I've mentioned for this group."
+    },
+    {
+      "turn": 3,
+      "speaker": "Kovi AI",
+      "text": "Thanks for that overview, Candidate_132. So you built a gateway that bridges gaming domains and uses LangGraph with FastAPI to answer player queries using a vector database and an LLM. Let me dig into the architecture a bit. When a player asks a query, how exactly does your LangGraph application decide whether to fetch from the vector database versus calling the LLM directly, or does it always do both?"
+    },
+    {
+      "turn": 4,
+      "speaker": "Candidate",
+      "text": "So we implemented a LangGraph application with the Supravisor work-out-home model. So when the users in the query that reaches the Supravisor mode first, and the Supravisor mode will be passed at a query to the LLM and RC to rephrase it here, rephrase it means so splitting in the multiple subqueries. and under in the in the in the prompt itself, if you'll mention that what are the different available work promotes and these work promotes will do what kind of functional it is. So based on the 20 tasks, so it was the 11 to the last item for the plan and execution also along with the splitting of queries into the multiple sub queries. So here the element will split the query into the multiple sub queries and different plan for it and according to the plan it will pass the sub queries into the multiple work modes. So all these work modes will invoke their activity, invoke their process parallely as per the plan. And once it features the information from the corresponding services, or it matches all these answers and send the answer to the other link to refresh the answer again, or to, I mean, to rephrase it. So once the reference is completed, we will use the LLM different model as NA, JEGE, to check whether the answer is properly, the other answer is properly defined for the query or not. So if it is not, if the model is not satisfied about the answer, we will do the auto correction again. So that's how it was implemented. Actually, we will do the auto correction three times. And in these three terms also if we did not receive the status-free level of answer. The corresponding fallback mode will get invoked. And the fallback of the fallback mode after the fallback mode, the corresponding message will get sent back to the user. So that is how it was implemented."
+    },
+    {
+      "turn": 5,
+      "speaker": "Kovi AI",
+      "text": "That's a detailed flow. So you're using a supervisor node that splits queries, routes to worker nodes in parallel, aggregates results, and then validates with an LLM before sending back. Here's my question: in that parallel execution of worker nodes, what happens if one worker node times out or returns an error while others succeed? Does the supervisor wait for all of them, or does it have a timeout strategy?"
+    },
+    {
+      "turn": 6,
+      "speaker": "Candidate",
+      "text": "Actually, the max one time that we will wait for service, answer is one second only. So within that one second, if we did not receive the answer, we will trigger it again. So after some time. So like this, we will wait for three, we will do the three attempts and in these three attempts also. If we did not receive the response means something wrong with the Sarisu, the corresponding fallback message will get sent to the final answer. So something like, so valid nor the whole fails or please try out the sample. Some kind of message will be passed to the user."
+    },
+    {
+      "turn": 7,
+      "speaker": "Kovi AI",
+      "text": "Got it. One second timeout with three retries before fallback. Here's a specific scenario: if a worker node for fetching user profile information times out twice but succeeds on the third retry, and meanwhile another worker node for game rules already returned data, does your supervisor wait for that third retry to complete before aggregating, or does it move forward with partial results?"
+    },
+    {
+      "turn": 8,
+      "speaker": "Candidate",
+      "text": "No, it won't move with the partial results. Naturally, it will wait for the responses from the all the work signals. The response can be either the proper answer it can be the fall back answer. So it will wait for it and then only the complete answer will get processed."
+    },
+    {
+      "turn": 9,
+      "speaker": "Kovi AI",
+      "text": "Clear. So the supervisor waits for all workers to finish, whether success or fallback. Now let me ask about the vector database you mentioned earlier. Which vector database did you actually use for storing game information and user profile data?"
+    },
+    {
+      "turn": 10,
+      "speaker": "Candidate",
+      "text": "I'm using the Pinecone for this Pinecone as a vector database for this one. We have a plenty of game-related information. We use the OpenAI Embry Model, it will do the semantic search for it. And with the semantic search results, it will identify the power-fire ranking answers. And this answer should meet the threshold value also. Then only it's considered as an answer. And whatever answers which meets the threshold level and the power-fire answers will go to the LLM again. And LLM will identify the best possible answer from this out of five answers. and that is considered as an answer for it. And the answer we fall by will be sent to the of the supervisor mode again. So that's how it got implemented."
+    },
+    {
+      "turn": 11,
+      "speaker": "Kovi AI",
+      "text": "So you're using OpenAI embeddings with Pinecone for semantic search, filtering by threshold, then passing top results to the LLM for final ranking. Quick question: when you set that threshold value for semantic similarity, how did you decide what threshold to use, and did you have to adjust it after seeing real player queries in production?"
+    },
+    {
+      "turn": 12,
+      "speaker": "Candidate",
+      "text": "Before the system gets in itself, we have some quality, some queries are there. So, those kind of queries, we just have only a kid and what is the threshold, what is the value or threshold value that we are meeting for it. So, we take that threshold value as a set. So, we use that threshold value."
+    },
+    {
+      "turn": 13,
+      "speaker": "Kovi AI",
+      "text": "Understood, you calibrated the threshold using test queries beforehand. Now, you mentioned using FastAPI to expose this system. How does the FastAPI backend handle the request from a player query all the way to returning the LangGraph result, and does it do any validation or preprocessing on the incoming query before passing it to the supervisor node?"
+    },
+    {
+      "turn": 14,
+      "speaker": "Candidate",
+      "text": "If I remember correctly, there is no validation before it reaches the SupraWizer node. And we use the next strategy as to send the as a frontend and backend is the LangGraph application for this. And for sending the results, we use the server sent events for it. So that's what I remember."
+    },
+    {
+      "turn": 15,
+      "speaker": "Kovi AI",
+      "text": "Got it, so Next.js frontend, FastAPI backend with LangGraph, and Server-Sent Events for streaming results back. Since you're streaming results with SSE, what happens if the client disconnects midway through the LangGraph execution? Does the supervisor node keep running in the background, or does FastAPI cancel the entire operation?"
+    },
+    {
+      "turn": 16,
+      "speaker": "Candidate",
+      "text": "Here also when there is a connection, this connection between the frontend and backend, we will check whether we can able to deliver the message of market. Actually, we will try it for three attempts and even these three attempts, so if you are unable to deliver the message means that the connection is there, so we will close the session. Also, that site was implemented."
+    },
+    {
+      "turn": 17,
+      "speaker": "Kovi AI",
+      "text": "So you retry delivery three times and close the session if it fails. But I'm asking specifically: does the LangGraph computation itself stop when the client disconnects, or does it continue running on the server even after you close the SSE session?"
+    },
+    {
+      "turn": 18,
+      "speaker": "Candidate",
+      "text": "Actually, we are stopping the execution and whatever the state is there, we will keep that state into the PostgreSQL. So whenever there is a connection happened again and if you got the same query means of whatever the session that is saved that will get reworked and it is processed again. So that's why it was implemented."
+    },
+    {
+      "turn": 19,
+      "speaker": "Kovi AI",
+      "text": "Okay, so you persist the state to PostgreSQL and resume later. That makes sense. Let me shift gears slightly: you mentioned storing game information and user profiles in Pinecone for semantic search, but where do you store the actual structured game data and user profile records that the worker nodes fetch from?"
+    },
+    {
+      "turn": 20,
+      "speaker": "Candidate",
+      "text": "Except the game related information, we are picking the data from the services soonly. Because this data will change oftenly and we need that real-in-a-real-time information. So, we always fetch the game profile, sorry, user profile, server, game logs, server, Alex, server, information. All these we pick it from the game services soonly. Only for the game related information, We are saving it into the pine cone. And we are fetching it. Actually, we have the plenty of game related PDF files are there. So before the land graph applications start, we will what we will do is we will embed those documents and we will get those embeddings in for the pine cone."
+    },
+    {
+      "turn": 21,
+      "speaker": "Kovi AI",
+      "text": "That's a smart approach, Candidate_132. Keeping real-time data in the services and using Pinecone only for the static game documentation makes sense for your use case. Thank you so much for walking me through the Gaming Gateway project in detail today. I really appreciated hearing about your LangGraph supervisor pattern, the retry logic, state persistence, and how you integrated all these technologies together. Best of luck, and we'll be in touch soon with next steps."
+    }
+  ],
+  "evaluations": {
+    "kovi_ai_scores": {
+      "communication": 8.2,
+      "problem_solving": 7.5,
+      "domain_expertise": 7.8,
+      "overall_score": 7.8
+    },
+    "human_panel_scores": {
+      "communication": 8.0,
+      "problem_solving": 7.5,
+      "domain_expertise": 7.5,
+      "overall_score": 7.6,
+      "final_verdict": "HIRE",
+      "evaluator_notes": "The candidate have very good knowledge in building AI systems using LangGraph, FastAPI, and Pinecone vector database. He explained things like supervisor architecture, parallel worker nodes, and error handling very clearly"
+    }
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "session_metadata": {
+    "candidate_alias": "Candidate_134",
+    "job_id": "JD-SENENG-7264",
+    "role": "Senior Software Engineer"
+  },
+  "transcript": [
+    {
+      "turn": 1,
+      "speaker": "Kovi AI",
+      "text": "Hi Candidate_134, I am Kovi AI, your AI interviewer today. Let's dive into some technical fundamentals. When you're reviewing code at a senior level, what's the single most critical thing you look for that signals whether a codebase will scale or become a maintenance nightmare?"
+    },
+    {
+      "turn": 2,
+      "speaker": "Candidate",
+      "text": "I think there is some cycloimatic complexity is there. So that value will get keep on increase if we have the block inside, block inside, block inside like that. So if the cycloimatic complexity will get increased, it means so it's very hard to manage in the future. So it's better to reduce it. So I will consider that one. And the weather the changes is going to be going to invoke any educators, educators, failures. Or it's going to be, it can cause any block issues. So these things I will consider for review."
+    },
+    {
+      "turn": 3,
+      "speaker": "Kovi AI",
+      "text": "I hear you on cyclomatic complexity being important. But here's a concrete scenario: you're reviewing a function with low cyclomatic complexity because someone extracted all the nested logic into separate helper functions, but now those helpers are calling each other in ways that create hidden circular dependencies. How would you catch that in code review, and what's the actual risk it poses to your system?"
+    },
+    {
+      "turn": 4,
+      "speaker": "Candidate",
+      "text": "That's a good question. Actually, the circular reference, suppose if we analyze the code with the textile, it can, it can, it can, it can flag it as a circular reference, or the error. So we can find that one and, or we can check in such a way."
+    },
+    {
+      "turn": 5,
+      "speaker": "Kovi AI",
+      "text": "Right, tools can catch it. But as a senior engineer, what would you actually do manually in code review before relying on a tool to catch it? Walk me through your thought process when you see a function calling another function?how do you trace whether there's a cycle without running static analysis?"
+    },
+    {
+      "turn": 6,
+      "speaker": "Candidate",
+      "text": "Actually, I will consider it like this. I will first look for the imports. I will do more of the code and I will look for the imports. And how these constructions are invoked. I will search in that way. And let us say, if the function, I mean, if the function is not function here, yeah, has the dependency on B. I will go on search B, whether the dependency, whether the B is depends on C or something like that. And if it is depends on C, I will look for C. And then the C is depends on here. I'm not so I will search it in that way. Maybe by looking at maybe on a high level, if you look at the import, so we can have one idea about it."
+    },
+    {
+      "turn": 7,
+      "speaker": "Kovi AI",
+      "text": "That's a reasonable manual trace. Now here's the hard part: you're doing this on a large codebase with fifty files and complex dependency chains. At what point do you stop manually tracing and decide it's too risky or time-consuming to review by hand? What's your threshold, and how do you communicate that risk back to the team?"
+    },
+    {
+      "turn": 8,
+      "speaker": "Candidate",
+      "text": "I will ask the team to implement the fitness functions for it. Maybe I will implement the architecture. Otherwise, we will do one thing. In the CACD implementation process, we will include the two sets, the check style implementation. So, it will find out whether there is any for the manual we will check four to six or seven files maximum. So if we take series that one means so we can flag it as a maybe there's a possibility of four cycle dependency and implement the implementer or implementer or That is all. I implement approach to resolve this kind of problem."
+    },
+    {
+      "turn": 9,
+      "speaker": "Kovi AI",
+      "text": "Okay, so you're saying you'd set up automated checks in CI/CD and limit manual review to a few files. But here's the tension: what if the static analysis tool gives you false positives on legitimate patterns like the Strategy or Factory patterns, where objects intentionally reference each other through interfaces? How do you distinguish between a real circular dependency problem and a valid design pattern?"
+    },
+    {
+      "turn": 10,
+      "speaker": "Candidate",
+      "text": "I think in this follow that approach."
+    },
+    {
+      "turn": 11,
+      "speaker": "Kovi AI",
+      "text": "I need you to be more specific here. When you say \"follow that approach,\" which approach exactly are you referring to? Are you talking about using interfaces to break the cycle, or are you saying the static analysis tool should be configured differently to recognize design patterns?"
+    },
+    {
+      "turn": 12,
+      "speaker": "Candidate",
+      "text": "Actually, in the Sonar tube itself, we can tune it to something like, whether the object gets in the sense here. I'm half okay, forget about doing good. In the units, in the Sonar tube itself, we can tune it like, if we are instantiating with the interfaces, just mark it as a suppress wanting something like that only. We can tune to to identify the, I mean, to ignore the false false tools. Not exactly how can we do that one? We have to, I have to, re-check it again."
+    },
+    {
+      "turn": 13,
+      "speaker": "Kovi AI",
+      "text": "Fair point?you'd need to verify the exact configuration. Let me shift gears. You mentioned cyclomatic complexity and dependencies early on. When you're actually writing production code yourself, what's your personal rule for when a function is too complex and needs to be split? Is it a specific complexity number, or do you have a different heuristic?"
+    },
+    {
+      "turn": 14,
+      "speaker": "Candidate",
+      "text": "Actually, my system to be easily manageable in the future. So, that's what I will consider in my mind. So, whenever there is a huge number of interblocks inside of one block and another block, I will try to split it into the multiple methods. So, that's what I will do and I will implement it in such a way. So, with that one, I can say the complexity will get ready. used. So that's how I will plan."
+    },
+    {
+      "turn": 15,
+      "speaker": "Kovi AI",
+      "text": "That's practical, but you didn't give me a concrete number or a clear trigger. Let me ask directly: if you're writing a function and you hit, say, eight nested if-else statements, do you split at that point? Or do you wait until it's twelve? What's the actual breaking point for you, and why that number?"
+    },
+    {
+      "turn": 16,
+      "speaker": "Candidate",
+      "text": "All right, how can we remember that what is the maximum cyclo-matic complexity that we can say we can say. We have to reach it now, we have to check the configurations, we can't remember that value. Don't ask this question."
+    },
+    {
+      "turn": 17,
+      "speaker": "Kovi AI",
+      "text": "Fair enough?you'd check the project standards. Let me move to testing frameworks then. When you're designing tests for a critical service, walk me through how you decide between unit tests, integration tests, and end-to-end tests. What's your allocation strategy, and why?"
+    },
+    {
+      "turn": 18,
+      "speaker": "Candidate",
+      "text": "The unit test is for the backend logic. So let us say if there is a input is like this and what is expected behavior and what if it fails and how it is behaving for the failure cases also. So that's what I will I will listen unit cases for. And for the integration test, let us say on top of the vendor request comes, how it is going to be processed and what is the output for it one. I can design integration test like that only. The request level I can say. So end to end test means everything. Let us say in the front end side, what is the in this scenario? What is the request that will be sent and what is the values for that one? So like that one, we can define it as cases for it. So it's good to keep three tests. And we should make sure that each and every test case should be executed properly. Before it is going to the production."
+    },
+    {
+      "turn": 19,
+      "speaker": "Kovi AI",
+      "text": "You've described what each type does, but you didn't answer the allocation question. On a real project with limited time and resources, do you write 70 percent unit tests and 10 percent integration, or the reverse? And more importantly, why that split? What's driving your decision?"
+    },
+    {
+      "turn": 20,
+      "speaker": "Candidate",
+      "text": "This is because the unit test cases reflect the backend logic. So how the... and I will make sure that each and every logic should be each and every line of code should be covered with the unit test cases. So that means that we'll give you an idea that the backend logic is working perfectly. So integration test means probably there can be a problem at the client side sending the invocations. Otherwise it reflects what will happen if a huge number of requests comes like that. So we will split it accordingly. 70% of the unit has cases under the 10% of the integration tests like that. But I don't know what is the percentage, I mean the allocation of time for it. But I will make sure that each and every test case should be implemented and it should cover all the lines of code in the code, all the lines of code in the That was it."
+    },
+    {
+      "turn": 21,
+      "speaker": "Kovi AI",
+      "text": "You're saying 70 percent unit and 10 percent integration, but that only adds up to 80 percent. What about the remaining 20 percent, and where do end-to-end tests fit into your allocation? Also, you said \"cover all lines of code\"?are you talking about code coverage percentage, or literal line-by-line coverage?"
+    },
+    {
+      "turn": 22,
+      "speaker": "Candidate",
+      "text": "Yes, I'm saying that with the unit test case, you should cover each and every line of code in the project. It can be part of your condition else condition or it can be the exception block. Each and every line should be covered with the coverage. We can get the coverage to percentage also. How many lines are covered and how many are uncovered after execution of the unit test cases. the working numbers. Okay. So what I'm saying is I will implement a unit test case for everything and each and every request I will implement a integration test. We don't know what is the percentage and the transparent on that one. We should implement it. Otherwise we won't we won't let the project go to get into the production. And don't think about this what is the 10 what is the 7 that is the 14 question."
+    },
+    {
+      "turn": 23,
+      "speaker": "Kovi AI",
+      "text": "Understood. Let me ask you this directly then: in a real scenario, you have a legacy function with 500 lines of code and deeply nested logic. Getting 100 percent code coverage on it would take weeks. Do you actually push for 100 percent coverage on that function, or do you make a pragmatic call? If pragmatic, what's your threshold, and how do you justify it to your team?"
+    },
+    {
+      "turn": 24,
+      "speaker": "Candidate",
+      "text": "Now the AI comes in, it does not take a risk of time to implement a unit of cases, okay? We can do that one and we can cover the code as quickly as possible. This is a really fucking question, I won't answer it."
+    },
+    {
+      "turn": 25,
+      "speaker": "Kovi AI",
+      "text": "I appreciate your directness. Let me move forward. In system design, when you're architecting a microservice that needs to handle high throughput, walk me through how you decide between synchronous and asynchronous communication between services. What's your decision framework?"
+    },
+    {
+      "turn": 26,
+      "speaker": "Candidate",
+      "text": "Actually, if there is a huge number of requests to be processed, I mean, it should be the high throughput means I will plan it accordingly. Something like each and every activity I will consider it as a service and I will create it. I will implement it as a service for this one. And I will publish those services to the client so that they can invoke that are service. And in the backend, now as it also, suppose if there is a database in location is there to get that to achieve the high throughput, I will maintain some data business like a release or something like that. And I will use the LCE approach to keep the data into the LCEU. And I will use the L1 and L2 cache framework which the L1 is at the application level and L2 is at the, the radius level layer. So that I will try to get a maximum throughput for the data retrieval. For the synchronous and asynchronous also, let us say, I will make it as a synchronous call or if there is only just a retrieval information and if it is a synchronous call, if it is going to update data, data itself. So that's all it, then."
+    },
+    {
+      "turn": 27,
+      "speaker": "Kovi AI",
+      "text": "You mentioned caching strategies and services, but you didn't directly answer the sync versus async question. Let me be concrete: a client sends a request to create an order, which triggers inventory updates, payment processing, and email notifications. Do you make all of those calls synchronous and wait for all responses, or do you make some async? Which ones, and why?"
+    },
+    {
+      "turn": 28,
+      "speaker": "Candidate",
+      "text": "This kind of issue, it's a synchronous call only because if we create an order, once the order gets created, then only we can update the inventory. I mean, first we'll check the inventory first. And whether we have the inventory of the given order, then only we can proceed. So it's a synchronous or synchronous only once order gets created. I have to once it is created then only I have to update the inventory and once the payment to create order itself, I have to check out payment once the payment is successful then only I can create the order. So once the order gets created then only I can create an email I can send an email. So on this is an essay I think and I'll see you in soly work. One after another only it should be processed."
+    },
+    {
+      "turn": 29,
+      "speaker": "Kovi AI",
+      "text": "So you're saying everything is sequential and synchronous. But here's the problem: if the email service is down or slow, your entire order creation blocks and the customer sees a timeout. That's a poor user experience. Why would you block on sending an email when the order is already successfully created and paid? What's the actual business requirement that forces you to wait for the email before returning success to the client?"
+    },
+    {
+      "turn": 30,
+      "speaker": "Candidate",
+      "text": "Yes, actually, for sending the email, we can consider it as a non-sequential, because once the order gets created, we can send the successful message to the user. And if it is low, it will send a mail later. We'll keep it as a... We'll keep it as... We'll keep it into the one of the... something or some other approach and rules and that one later also."
+    },
+    {
+      "turn": 31,
+      "speaker": "Kovi AI",
+      "text": "Good, so email is async?you'd use a queue or message broker. Now, what about payment processing? If the payment service is temporarily down, do you still make that synchronous, or do you queue it? And if you queue it, how do you handle the case where payment succeeds but your system crashes before recording it?"
+    },
+    {
+      "turn": 32,
+      "speaker": "Candidate",
+      "text": "This is the case, suppose if the payment service is down, better to go process that order. Just leave it and send that message to the user, stating that we can't process this order due to some other internal issue. And cancel that session itself. I mean, invalidate that session. So that the order will not be created and the payment will never be processed. implemented."
+    },
+    {
+      "turn": 33,
+      "speaker": "Kovi AI",
+      "text": "That makes sense for failure handling. But you didn't answer my actual question: do you make the payment call synchronous or asynchronous? And if it's async and queued, how do you prevent a situation where the payment gateway confirms the charge but your system crashes before it records the transaction in your database?"
+    },
+    {
+      "turn": 34,
+      "speaker": "Candidate",
+      "text": "Here are the two cases. If I make it as a synchronous, we will wait for it to until the until getting the success confirmation. So if it fails, it means we can send it directly, send it to the user stating that the payment service is done something like that, some working information. We can send it to the user. So if we keep it as a synchronous we'll keep it in a queue and we will wait for it until we get a confirmation. So if we are using a synchronous situation here, before the, I mean, maybe if you wait for too much long time and whatever the request that gets invalidated. So in this scenario, we will trigger the some backups will trigger the giving back money to the user, something like that, some process we can invoke it and it will try to refund the money to the user. So that's how we will process it."
+    },
+    {
+      "turn": 35,
+      "speaker": "Kovi AI",
+      "text": "You're describing a timeout and refund process, which is good. But you still haven't clearly said: is your payment call synchronous or asynchronous in your design? And here's the critical part?if you're synchronous and waiting for the payment gateway, what's your timeout value, and why that specific number?"
+    },
+    {
+      "turn": 36,
+      "speaker": "Candidate",
+      "text": "Because we can't wait for a lot of time to wait for a result from the service. So we will invalidate that session under in the meantime. So if the... All these are fucking cushions, I can't answer it."
+    },
+    {
+      "turn": 37,
+      "speaker": "Kovi AI",
+      "text": "I understand. Let me shift to code review specifics then. You're reviewing a pull request where someone has written a function that handles both database queries and business logic in the same method. What's your specific feedback, and would you approve or request changes?"
+    },
+    {
+      "turn": 38,
+      "speaker": "Candidate",
+      "text": "I will do the request changes because we should not handle everything in one method. We should ask them to split it. We will separate the business logic with the database invocations."
+    },
+    {
+      "turn": 39,
+      "speaker": "Kovi AI",
+      "text": "Okay, so you'd ask them to split it. But here's the practical question: how would you structure it? Do you create a separate data access layer class, use dependency injection to pass a repository, or something else? Walk me through the exact pattern you'd recommend and why that pattern specifically."
+    },
+    {
+      "turn": 40,
+      "speaker": "Candidate",
+      "text": "I will use the controller pattern for this one. So the control pattern will do the first it will invoke the business logic and once it got processed, I can use the some database layer, where we can able to invoke the, I mean, where we can get the connection pulling and what of the data operation that is required? We will implement that one. So that's how we will we will do that one. I will implement the logic."
+    },
+    {
+      "turn": 41,
+      "speaker": "Kovi AI",
+      "text": "You said \"controller pattern\" but that's not a data access pattern?that's an HTTP routing layer. Are you talking about the Repository pattern, or the Data Access Object pattern? And more importantly, would you pass the repository as a dependency to your business logic class, or would you have the business logic instantiate it directly?"
+    },
+    {
+      "turn": 42,
+      "speaker": "Candidate",
+      "text": "I will instantiate the penis instance logic and after completion of that one only I can invoke the data access layer and whatever the required operation that is required. I will invoke that one."
+    },
+    {
+      "turn": 43,
+      "speaker": "Kovi AI",
+      "text": "So you're instantiating the data access layer directly inside the business logic. That creates tight coupling and makes testing harder because you can't mock the database layer. As a senior engineer, why would you choose direct instantiation over dependency injection, which would let you swap in a mock during unit tests?"
+    },
+    {
+      "turn": 44,
+      "speaker": "Candidate",
+      "text": "What I'm saying is, on top of this two, I will maintain a one-control, one-day-a-one logic, where it is going to invoke the business logic method, and after completion of the business logic, in the control class itself, I will invoke the data-access layer. These two are the, I'm saying about three things. One is the control controller, second one is the business logic, and the third one is the control controller. is the data base layer. In the controller class itself, I will invoke the business layer. Once it gets completed, the control comes to the control layer and in the controller revealing what the data access is there. So that's how I will plan."
+    },
+    {
+      "turn": 45,
+      "speaker": "Kovi AI",
+      "text": "So the controller orchestrates both business logic and data access. But that still doesn't solve the testing problem?your business logic layer is still tightly coupled to the database layer if it instantiates it directly. Let me ask directly: when you write unit tests for your business logic, how do you avoid hitting the actual database?"
+    },
+    {
+      "turn": 46,
+      "speaker": "Candidate",
+      "text": "By using the blocking mock operation."
+    },
+    {
+      "turn": 47,
+      "speaker": "Kovi AI",
+      "text": "That's good?mocking is the right approach. Candidate_134, thank you so much for your time today. We've covered a lot of ground across code review practices, testing strategies, system design decisions, and architectural patterns. I appreciate your candid responses and your willingness to engage with the technical challenges. Best of luck with the rest of your interview process."
+    }
+  ],
+  "evaluations": {
+    "kovi_ai_scores": {
+      "communication": 4.5,
+      "problem_solving": 5.0,
+      "domain_expertise": 6.5,
+      "overall_score": 5.3
+    },
+    "human_panel_scores": {
+      "communication": 4.5,
+      "problem_solving": 5.0,
+      "domain_expertise": 6.5,
+      "overall_score": 5.3,
+      "final_verdict": "NO HIRE",
+      "evaluator_notes": "The candidate have some basic knowledge in code review and caching, but he struggled with specific metrics like cyclomatic complexity limits and dependency injection patterns. Because his architectural depth for senior-level design and testing allocation was not strong enough, we are giving no hire."
+    }
+  }
+}

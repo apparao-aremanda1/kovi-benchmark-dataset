@@ -1,0 +1,150 @@
+{
+  "session_metadata": {
+    "candidate_alias": "Candidate_117",
+    "job_id": "JD-AI-7284",
+    "role": "AI Engineer"
+  },
+  "transcript": [
+    {
+      "turn": 1,
+      "speaker": "Kovi AI",
+      "text": "Hi Candidate_117, I am Kovi AI, your AI interviewer today. Let's dive into a system design challenge that's relevant to modern AI applications. I'd like you to design a scalable AI-powered document search and retrieval system where users can upload documents, ask natural language questions about them, and get accurate answers with source citations. How would you architect this end-to-end, starting from the frontend through to the backend and data storage?"
+    },
+    {
+      "turn": 2,
+      "speaker": "Candidate",
+      "text": "In the frontend, we can use the... Actually, let me go with the backend first. So, in the backend, I will use the supervisor of the motherboard. And that is super the work cannot be used. A conditional education, something like suppose if the user process are document like a PDF document, it will be processed better one more than if the user asks the question that will be processed better and that more. So that's how we will process it. And so whenever there is a node which process the document means it is going to interact with the vector database. Here, there are two cases we have. Suppose if there is a huge number of documents and those are coming very quickly, I mean, millions of documents are coming, millions of users are floating in the documents. So it's good to go with the PC vector in the post-rescale. Suppose if there is a not so often, documents are coming under the document. Upload is not that much a regular means. It's good to go to the bank home. So that's how I can take the vector database. And with the pine cone, suppose let us say there is no huge number of documents or products. So the pine cone with the washing system, we can embed the newly command, newly command documents into the existing m-biddings. And in the second or not, or whatever the document that comes in, we will ask the first two, not the document, suppose if there is a plain query comes in, we will ask them to rephrase the query. And once it is rephrase, so it will come to the, it will go to the, I mean, in the work code itself, it will call the Lamb and it takes a rephrase format of the query. And once it is refraced, we will ask to change it. We will ask to a embedded one city's embedding. We will do the semantic sketch for that in the semantic sketch, we will identify the top-fire ranking answers for MIT. And once we got the top-fire ranking with the minimum threshold value meets, I will send it to the LLM to find the best possible answer from this out-of-top-fire ranking process. And under once it is done, we will leave we leave it for it, rather the system has given a proper answer not using the auto correction. If it does not, given answer means we will leave it to take in. This is repeated for three times. So once the system did not find the proper answer, then stuff all that will get involved. And in the fallback, not the corresponding message will be sent back to the user. And if the proper answer has found that that will be passed to a user. So I use this approach to design the application that is mentioned by you."
+    },
+    {
+      "turn": 3,
+      "speaker": "Kovi AI",
+      "text": "I appreciate the effort, Candidate_117, but I need to pause here because your answer is difficult to follow and contains some unclear terminology. Let me ask you a direct, concrete question to ground this: when a user uploads a PDF document, what exact steps happen in your backend before that document can be searched? Walk me through it step by step, starting from the API endpoint that receives the file."
+    },
+    {
+      "turn": 4,
+      "speaker": "Candidate",
+      "text": "Suppose if the user sends the document and it reaches the supervisor node, based on input type, that will go to the PDF processing document, or PDF processing node. So, in this work or not, suppose if the divith that we are using is Pinecone, we will embed this document and we will try to match these new embeddings into the movements. So that's what I'm seeing."
+    },
+    {
+      "turn": 5,
+      "speaker": "Kovi AI",
+      "text": "Okay, let me be more specific. When you say \"embed this document,\" what exactly are you doing? Are you chunking the PDF into smaller pieces first, or are you embedding the entire document as one vector? And which embedding model would you use, and why that one?"
+    },
+    {
+      "turn": 6,
+      "speaker": "Candidate",
+      "text": "I'm using the OpenAI embedding model. So probably I will use this model only. So why it is means with the 68% of offering or something else we will mention. So that's how we will embed it. And the smaller pieces first. Actually, no. We will chunk the entire data into the embeddings. So, open here embedding model, it will create embeddings and we will match it into the vector database."
+    },
+    {
+      "turn": 7,
+      "speaker": "Kovi AI",
+      "text": "Good, so you're chunking the document into smaller pieces and using OpenAI embeddings. Now here's a concrete problem: what happens if a single chunk is larger than the token limit that OpenAI's embedding model accepts? How do you handle that edge case?"
+    },
+    {
+      "turn": 8,
+      "speaker": "Candidate",
+      "text": "We will definitely click this. Actually, I said that OpenAI, Smallboard only, we will use it. But in a minute, the embedding should not be more than the token. The OpenAI model will take it, so it should be less than the token. We will take care of that."
+    },
+    {
+      "turn": 9,
+      "speaker": "Kovi AI",
+      "text": "That's vague. Let me ask directly: OpenAI's embedding model has a specific token limit. Do you know what that limit is, and if a chunk exceeds it, what's your exact strategy?do you split it further, truncate it, or something else?"
+    },
+    {
+      "turn": 10,
+      "speaker": "Candidate",
+      "text": "I'm saying that we won't create a, sorry, we won't create a chance that exceeds the token limit of the OpenAI model. Suppose in any case, if it exceeds, we will split into the multiplusions."
+    },
+    {
+      "turn": 11,
+      "speaker": "Kovi AI",
+      "text": "Alright, so you'll split further if needed. Now let's talk about the query side. When a user asks a question, you mentioned semantic search and retrieving top results. If you retrieve the top five chunks from Pinecone and they're contradictory or have conflicting information, how does your LLM decide which one is the correct answer to return to the user?"
+    },
+    {
+      "turn": 12,
+      "speaker": "Candidate",
+      "text": "I said that we will identify the software ranking answers and they are not duplicated. So those are sent to the LLE, and ask for the best possible answer. Whatever the content it answers, it is there that will be duplicated. It will identify the file answer only. One of the best possible answers for the query. So we will use the auto correction approach here in the auto correction. We will pass the identity by answer along with the question and we will make sure that how far this answer is correct. So based on that one if the answer is not satisfied we will repeat the process again. So we will repeat this process for the three times. So that's what we will do."
+    },
+    {
+      "turn": 13,
+      "speaker": "Kovi AI",
+      "text": "I hear you're using an LLM to pick the best answer and validating it three times. But here's the problem: if all five retrieved chunks genuinely contradict each other?say one chunk says \"Feature X costs $100\" and another says \"Feature X costs $200\"?how does the LLM know which source document is actually correct? What mechanism prevents it from just picking the wrong answer confidently?"
+    },
+    {
+      "turn": 14,
+      "speaker": "Candidate",
+      "text": "In the prompt itself, we will mention that if the answer is not clear, just respond with some other answer. We can't decide the cost of that feature. of messages we will ask them or we will ask them to return. So, Angela will take the choice and return the the appropriate answer."
+    },
+    {
+      "turn": 15,
+      "speaker": "Kovi AI",
+      "text": "So you're telling the LLM to say \"I don't know\" if it's unsure. That makes sense as a fallback. Now let me shift to infrastructure: you mentioned Pinecone earlier for vector storage. In your system, when millions of documents are uploaded rapidly, how do you handle the latency and cost of embedding all those documents with OpenAI's API before they can be searched?"
+    },
+    {
+      "turn": 16,
+      "speaker": "Candidate",
+      "text": "with the post-care scale. And in the PZ vector, we will use the different schema system for the new kind of documents. So in that system, we will use some background as to to embed the new incoming documents into the elements. So we have to change that approach to the PZ vector instead of Pine Goo. Between some of the number of documents that we are coming."
+    },
+    {
+      "turn": 17,
+      "speaker": "Kovi AI",
+      "text": "You're switching to pgvector with PostgreSQL for high volume. That's reasonable. But here's my question: if you're using background jobs to embed documents asynchronously, how do you prevent a user from searching before their newly uploaded document is fully embedded and indexed? What's your strategy there?"
+    },
+    {
+      "turn": 18,
+      "speaker": "Candidate",
+      "text": "The strategy is like this. Actually, we will define something like a state where it will like a... It's set to only one, only if the newly documented and dates in this. Based on that only, our system will look for the newly embedded embeddings. or because of the latest embedding search. Otherwise, it will go with the earlier ones. So that's all we will think."
+    },
+    {
+      "turn": 19,
+      "speaker": "Kovi AI",
+      "text": "Okay, so you track a state for whether a document is indexed. Now let's talk about the frontend and API layer. You mentioned using a supervisor node with conditional routing. Is that a LangGraph concept, or are you building custom routing logic in FastAPI? And why choose that approach over the other?"
+    },
+    {
+      "turn": 20,
+      "speaker": "Candidate",
+      "text": "For now we will go with the custom wrote approach only because in the future if there is a new thing comes in maybe otherwise. And also here is a simple routing logic only we have the two modes are there. So we can go for a go. I don't want to complex the system by introducing the new things. We will simply check it and we will master a Rupusak responding motor. So, I will go to the custom building logic."
+    },
+    {
+      "turn": 21,
+      "speaker": "Kovi AI",
+      "text": "That's fair for simplicity. But you mentioned a supervisor node and conditional routing earlier?that sounds like LangGraph's agentic patterns. Are you actually using LangGraph, or did you misspeak about the architecture? Be direct here."
+    },
+    {
+      "turn": 22,
+      "speaker": "Candidate",
+      "text": "I mentioned it is the LangGraph only and with the LangGraph only we will redirect it."
+    },
+    {
+      "turn": 23,
+      "speaker": "Kovi AI",
+      "text": "Alright, so you are using LangGraph. Here's the tension: you just said you want custom routing logic for simplicity, but LangGraph already gives you supervisor nodes and conditional routing built-in. Why not leverage LangGraph's native features instead of rebuilding routing logic yourself?"
+    },
+    {
+      "turn": 24,
+      "speaker": "Candidate",
+      "text": "Actually, I was confused earlier, so it's good to go to the LangGraph only. And LangGraph is also very simple for routing. So, there is no need to write additional logic for it. LangGraph will cover the sub-of-right and we can use that. I'm taking my words back."
+    },
+    {
+      "turn": 25,
+      "speaker": "Kovi AI",
+      "text": "That's good clarity, Candidate_117. Thank you for walking through your system design with me today. You've covered the key components from document ingestion through vector storage, retrieval, and LLM validation, and you showed willingness to reconsider your approach when challenged. I appreciate your time and effort in this interview."
+    }
+  ],
+  "evaluations": {
+    "kovi_ai_scores": {
+      "communication": 4.5,
+      "problem_solving": 5.0,
+      "domain_expertise": 6.0,
+      "overall_score": 5.2
+    },
+    "human_panel_scores": {
+      "communication": 6.3,
+      "problem_solving": 4.3,
+      "domain_expertise": 5.3,
+      "overall_score": 5.3,
+      "final_verdict": "NO HIRE",
+      "evaluator_notes": "The candidate have basic knowledge in document search and vector databases, but he got confused about custom routing versus LangGraph and token limits. Because his technical depth and clarity in system design were not strong enough for the role, we are giving no hire."
+    }
+  }
+}
