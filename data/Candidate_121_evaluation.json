@@ -1,0 +1,200 @@
+{
+  "session_metadata": {
+    "candidate_alias": "Candidate_121",
+    "job_id": "JD-SFADMIN-7245",
+    "role": "Senior Salesforce Administrator"
+  },
+  "transcript": [
+    {
+      "turn": 1,
+      "speaker": "Kovi AI",
+      "text": "Hi Candidate_121, I am Kovi AI, your AI interviewer today. Let's dive into some technical scenarios you'd encounter as a Senior Salesforce Administrator. Can you walk me through how you would approach building a real-time data synchronization between Sales Cloud and Service Cloud when a customer record is updated, and what Salesforce features would you leverage to make that happen?"
+    },
+    {
+      "turn": 2,
+      "speaker": "Candidate",
+      "text": "That did not encounter anything within Sales Cloud and Service Cloud."
+    },
+    {
+      "turn": 3,
+      "speaker": "Kovi AI",
+      "text": "You're right, let me be more specific. If a contact is updated in Sales Cloud and you need Service Cloud to immediately reflect that change in a related case record, how would you technically implement that synchronization and what Salesforce features would you use?"
+    },
+    {
+      "turn": 4,
+      "speaker": "Candidate",
+      "text": "Web-chain, Man-Says, Salesforce Cloud, Synchronization, Desktop, Web-chain. Let me find this, let me see what you want."
+    },
+    {
+      "turn": 5,
+      "speaker": "Kovi AI",
+      "text": "I appreciate you thinking through this. Let me ask more directly: when you need to sync data between Sales Cloud and Service Cloud in real time, what specific Salesforce tools or features have you actually used or are you familiar with? For example, are you thinking of Platform Events, Flow, or something else?"
+    },
+    {
+      "turn": 6,
+      "speaker": "Candidate",
+      "text": "Platform, Platform Events is more accurate. We can release a platform event. Yeah. I think we can use platform events. Platform events and flows."
+    },
+    {
+      "turn": 7,
+      "speaker": "Kovi AI",
+      "text": "Good, so you'd use Platform Events to publish when a contact updates. Now let me ask you this: if you publish a Platform Event from Sales Cloud, and the Flow subscriber in Service Cloud fails to process it on the first attempt, what exactly happens to that event message and how would you handle the retry scenario?"
+    },
+    {
+      "turn": 8,
+      "speaker": "Candidate",
+      "text": "Okay, I can send a email, the floor, the very email to the user, to the administrator, and I can and save that platform event and try again like after two to three minutes. I can do this like a three times if it is still did not process or you can send an email to the administrator developer."
+    },
+    {
+      "turn": 9,
+      "speaker": "Kovi AI",
+      "text": "I understand you'd notify via email, but that's a workaround. Let me ask more technically: Platform Events themselves have a specific retention window before they're lost. Do you know what that window is, and if your Flow subscriber misses the event during that time, can you actually retrieve and replay it, or is it gone forever?"
+    },
+    {
+      "turn": 10,
+      "speaker": "Candidate",
+      "text": "Okay, I'm not sure about the window, but yeah, if the event is gone and that is completely gone forever, but we can do one thing. We can say that even data in a custom object is anything if anything lost or if a fail to process that event, we can go back to that record and process it again if we save that in a custom object."
+    },
+    {
+      "turn": 11,
+      "speaker": "Kovi AI",
+      "text": "That's a practical workaround using a custom object as a fallback. Now, when you save that event data to a custom object as a backup, how would you then trigger the Flow to actually process that backed-up data later? Would you use a scheduled Flow, a record-triggered Flow, or something else?"
+    },
+    {
+      "turn": 12,
+      "speaker": "Candidate",
+      "text": "Okay. You see the even data to estimate it as a vector. How would you do that? To the flow, go ahead and press. Hit the meta."
+    },
+    {
+      "turn": 13,
+      "speaker": "Kovi AI",
+      "text": "I'm having trouble following you there. Let me simplify: after you save the event data to that custom object, what Flow trigger would you use to process those backed-up records? Would you use a scheduled Flow that runs every few minutes, or a record-triggered Flow when the custom object record is created?"
+    },
+    {
+      "turn": 14,
+      "speaker": "Candidate",
+      "text": "I also reported the flow in the customer objective, what is created, but again, if it may be, we will run into issue again. So, someone have to manually see that error, what the error we are getting."
+    },
+    {
+      "turn": 15,
+      "speaker": "Kovi AI",
+      "text": "I see, so you'd have a record-triggered Flow on the custom object, but you're saying manual review might still be needed for errors. Let me ask you this: instead of relying on manual checks, have you used Flow error handling like a try-catch mechanism or fault paths in Flow to automatically log and retry failed records without human intervention?"
+    },
+    {
+      "turn": 16,
+      "speaker": "Candidate",
+      "text": "Yeah, we can use a failed record of flows automatically to try again, but if it is a pickiest value, we got a pickest matching with a flow, and we come to automatically with a flow capture mechanism because the pickest cover. always going to fade if we don't have the matching one. So manual inter intervention is needed in some cases but yeah it is a case by case basis."
+    },
+    {
+      "turn": 17,
+      "speaker": "Kovi AI",
+      "text": "That makes sense on the picklist mismatch scenario. Let me shift gears now. You mentioned using Flows, so let me ask about Data Cloud. Have you worked with Data Cloud to unify customer data across Sales Cloud and Service Cloud, and if so, how would you structure that data model?"
+    },
+    {
+      "turn": 18,
+      "speaker": "Candidate",
+      "text": "I don't have that much knowledge on the data cloud. I did a certification, but I don't have real-time experience in data cloud."
+    },
+    {
+      "turn": 19,
+      "speaker": "Kovi AI",
+      "text": "Fair enough. Let's move to something more hands-on then. Walk me through how you'd use a Change Set to move a custom Flow from a sandbox to production, and what validation steps you'd perform before deployment."
+    },
+    {
+      "turn": 20,
+      "speaker": "Candidate",
+      "text": "We'll create a first-year installation connection from some box to production after that I'll create a bunch of changes at a component called Flow, which I'm going to add. I'll add that Flow and make sure that all the fields that we are using in the Flow are available. If there are no new fields, I'm going to add all those fields into these chains. I'm pushing the production after that I will validate that change set in production that is good the mic and deployed."
+    },
+    {
+      "turn": 21,
+      "speaker": "Kovi AI",
+      "text": "Good, you're validating the fields exist. But here's a specific scenario: what if your Flow references a custom object that doesn't exist in production yet? Would adding just the Flow to the Change Set be enough, or what else would you need to include and in what order?"
+    },
+    {
+      "turn": 22,
+      "speaker": "Candidate",
+      "text": "After adding flow, you can go to the dependent components in the chain set. There you will get all the objects, fields and everything what is needed for that flow to be deployed. So we can add all those dependent components to the chain set. And we can deploy."
+    },
+    {
+      "turn": 23,
+      "speaker": "Kovi AI",
+      "text": "Exactly, dependent components. Now let me ask about Web-to-Lead since that's on our list. How would you configure Web-to-Lead to capture form submissions from your website, and what happens to that data once it lands in Salesforce?"
+    },
+    {
+      "turn": 24,
+      "speaker": "Candidate",
+      "text": "Web-to-Lead, Data Simpets, and used to how to compare to data, to transfer all the information from your website. things when the web tool is laid. And once we got that, I will give, I'll give that website that's found data to the developer. And they put that form into their website. Once we got the data, we handle that automation in the flow or retilt that extrigial. Once we got that one, we say that it will lead object."
+    },
+    {
+      "turn": 25,
+      "speaker": "Kovi AI",
+      "text": "I understand you're using Flow or rules to handle the lead. Let me ask more directly: when a Web-to-Lead form is submitted, does the lead record automatically appear in Salesforce immediately, or is there a delay, and how would you handle duplicate leads from the same person submitting the form multiple times?"
+    },
+    {
+      "turn": 26,
+      "speaker": "Candidate",
+      "text": "Okay, in the left, the lead form is submitted. Now, it doesn't automatically appear from the Salesforce immediately into the Salesforce. So, we have to handle that one using Flow. I text using Flow or Trigger. So, I usually use Salesforce Flow. And we do the duplicate matching with the matching rules and the duplicate rules. In the same lead is appeared with the same email if we have the lead, weak and pro that I read, instead of creating that lead."
+    },
+    {
+      "turn": 27,
+      "speaker": "Kovi AI",
+      "text": "Good, so you'd use matching and duplicate rules. Now here's a scenario: you've set up duplicate rules to prevent duplicate leads on email, but a new lead comes in with a slightly different email format like \"john.doe@example.com\" versus \"johndoe@example.com\". Would your duplicate rule catch that, or would it create a duplicate, and how would you fix it?"
+    },
+    {
+      "turn": 28,
+      "speaker": "Candidate",
+      "text": "I'll add another field in addition to the EME like last name on the data, but as well, if those are also matching, for the EME, I'll put the fuzzy matching, and make the last name is exact match and the data, but the exact match, and then I will create a duplicate to not create the lead."
+    },
+    {
+      "turn": 29,
+      "speaker": "Kovi AI",
+      "text": "That's a solid approach with fuzzy matching on email. Let me shift to Experience Cloud now. Have you built or configured an Experience Cloud site, and if so, what's the main difference between how a customer portal works versus a partner portal in Experience Cloud?"
+    },
+    {
+      "turn": 30,
+      "speaker": "Candidate",
+      "text": "Yeah, I work with a speedancy cloud with a negative input in how it gets to the portal works, so it's a proper data experience. by the answer."
+    },
+    {
+      "turn": 31,
+      "speaker": "Kovi AI",
+      "text": "I'm having trouble following that. Let me ask more directly: in Experience Cloud, what's the key difference between a customer portal and a partner portal in terms of who can access what data and what permissions they have?"
+    },
+    {
+      "turn": 32,
+      "speaker": "Candidate",
+      "text": "As you can put now a portal and a portal portal, both are same right."
+    },
+    {
+      "turn": 33,
+      "speaker": "Kovi AI",
+      "text": "Actually, they're not quite the same. A customer portal is typically for end customers to view their own data, while a partner portal is for business partners to access shared data. Have you actually configured either type of portal in Experience Cloud, or is this not an area you've worked with hands-on?"
+    },
+    {
+      "turn": 34,
+      "speaker": "Candidate",
+      "text": "Okay, we set a bit of importance as an in-depth experience throughout. That is for customers for their end users. We gear long access to customers and who are logged into the portal that connects the data. They can create cases like that onto the platform."
+    },
+    {
+      "turn": 35,
+      "speaker": "Kovi AI",
+      "text": "That's a good example of using Experience Cloud for customer self-service with case creation. Candidate_121, thank you so much for your time today. I appreciate you walking through these Salesforce scenarios with me, from Platform Events and Flow synchronization to Change Sets, Web-to-Lead, and Experience Cloud. You've shared solid practical insights on how you'd approach these implementations. Best of luck with your interview process."
+    }
+  ],
+  "evaluations": {
+    "kovi_ai_scores": {
+      "communication": 6.0,
+      "problem_solving": 5.0,
+      "domain_expertise": 5.5,
+      "overall_score": 5.5
+    },
+    "human_panel_scores": {
+      "communication": 6.5,
+      "problem_solving": 4.5,
+      "domain_expertise": 5.5,
+      "overall_score": 5.5,
+      "final_verdict": "NO HIRE",
+      "evaluator_notes": "The candidate has a basic understanding of Salesforce concepts and was able to explain some practical areas like Change Sets, Web-to-Lead and Flow. However, the technical depth and problem-solving approach were not strong enough, especially in Platform Events, error handling and Experience Cloud, for a mid-level Salesforce Engineer role."
+    }
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "session_metadata": {
+    "candidate_alias": "Candidate_140",
+    "job_id": "JD-SOFTENG-7451",
+    "role": "Software Engineer"
+  },
+  "transcript": [
+    {
+      "turn": 1,
+      "speaker": "Kovi AI",
+      "text": "Hi Candidate_140, I am Kovi AI, your AI interviewer today. Let's dive into some technical fundamentals. When you're writing Python code in production, how do you typically handle memory management and garbage collection, and have you run into any situations where the default behavior caused issues?"
+    },
+    {
+      "turn": 2,
+      "speaker": "Candidate",
+      "text": "I don't know if related to the memory management I never faced such issues, even though whatever the variables that are defined at the class level that are applicable to all the objects that are created and suppose if there is an object with the same variable in this requirement in the class level then the priority then it is trying to it will create the object in the it will create a separate instance of separate instance of the So, no, should I never feel such a situation? And I don't have any problems."
+    },
+    {
+      "turn": 3,
+      "speaker": "Kovi AI",
+      "text": "I hear you. Let me ask more directly then: in Python, if you have a class variable and an instance variable with the same name, which one does the interpreter look up first when you access it through self, and can you walk me through a quick example of how that lookup order works?"
+    },
+    {
+      "turn": 4,
+      "speaker": "Candidate",
+      "text": "Actually, in those cases, let us say, if the class variable has a variable in the file, it has an object that has a class A, and we define the name of the class as a, some example one. And we created an object for example, one is A. For example, data identified the stability of us to the other class variable. And suppose I have created another variable in the another variable name like or a dot, a dot identified some value. Then the stability first of the object will later be to not the class level variable. So that's how it works actually. The first priority, the first two. The first it looks here, I'll look at the object level and later on it moved, once it is not available, then it will look in the class level."
+    },
+    {
+      "turn": 5,
+      "speaker": "Kovi AI",
+      "text": "Right, so instance variables shadow class variables. Let me test this with a concrete scenario: if you modify a class variable through the class itself, like MyClass.counter = 5, and then you have an instance that previously accessed self.counter, what happens to that instance's view of counter after you change the class variable?"
+    },
+    {
+      "turn": 6,
+      "speaker": "Candidate",
+      "text": "Suppose if you modify the class variable, that is going to impact all the, I mean, impact in all over the objects. I mean, so in those classes, wherever this class is going to be referred, it will have impact in all the cases. But here, here, the object is going to be, or if you are modifying that object variable. only at that object level."
+    },
+    {
+      "turn": 7,
+      "speaker": "Kovi AI",
+      "text": "That's partially correct, but let me sharpen this: if an instance already has its own instance variable shadowing the class variable, and then you modify the class variable through the class, does that instance see the change or not?"
+    },
+    {
+      "turn": 8,
+      "speaker": "Candidate",
+      "text": "I may know how you will define the how you will modify the class variable can you give a simple example with it. I'm just little confused here."
+    },
+    {
+      "turn": 9,
+      "speaker": "Kovi AI",
+      "text": "Sure, simple example: you have class A with a class variable count equals zero. You create an instance obj equals A, then you do obj.count equals five. Now if you do A.count equals ten, what does obj.count print out?"
+    },
+    {
+      "turn": 10,
+      "speaker": "Candidate",
+      "text": "Here the object.com brings only what are the variables that we assign. Like now it is 5 only, so it prints 5. And for the class variable only we are changing it's variable to 10. So if you print the class variable, then only it prints 10."
+    },
+    {
+      "turn": 11,
+      "speaker": "Kovi AI",
+      "text": "Good, that's correct. Now let's shift gears to Java. When you're working with Java collections like HashMap, how do you handle the case where two objects have the same hashCode but are not equal according to the equals method?"
+    },
+    {
+      "turn": 12,
+      "speaker": "Candidate",
+      "text": "I actually hear the comparison is the equal sign, R is an equals method. Can you please classify it? Can you please explain it?"
+    },
+    {
+      "turn": 13,
+      "speaker": "Kovi AI",
+      "text": "Sure. The equals method checks if two objects are logically the same, while the double equals sign checks if they point to the same memory location. In a HashMap, if two keys have the same hashCode but equals returns false, where do they actually get stored in the hash table?"
+    },
+    {
+      "turn": 14,
+      "speaker": "Candidate",
+      "text": "Actually, double equals and we'll check the memory location, whether they are pointing to the same memory location or not. And equals returns the hash values, let us say. Suppose if we have a 64- say something suppose if we have a 64-character hash value and a 64-character value both are not saying so that's how it is going to check."
+    },
+    {
+      "turn": 15,
+      "speaker": "Kovi AI",
+      "text": "I think there's some confusion here. Let me clarify: the equals method doesn't return hash values, it returns true or false. In a HashMap with hash collisions, if two keys hash to the same bucket but equals returns false, they both go into that same bucket using a linked list or tree structure. Have you actually used a HashMap in production code and had to debug a collision issue?"
+    },
+    {
+      "turn": 16,
+      "speaker": "Candidate",
+      "text": "The solution is to come when the two objects are pointing to the same hash value. So the data comes in such a scenario."
+    },
+    {
+      "turn": 17,
+      "speaker": "Kovi AI",
+      "text": "I need to move forward given our time. Let me ask about JavaScript: when you use the keyword this in JavaScript inside a regular function versus an arrow function, what's the difference in how this gets bound?"
+    },
+    {
+      "turn": 18,
+      "speaker": "Candidate",
+      "text": "No idea."
+    },
+    {
+      "turn": 19,
+      "speaker": "Kovi AI",
+      "text": "Okay, let me give you the core difference: in a regular function, this is determined by how the function is called, but in an arrow function, this is inherited from the surrounding scope. Can you think of a practical scenario where this difference would cause a bug in your code?"
+    },
+    {
+      "turn": 20,
+      "speaker": "Candidate",
+      "text": "I'm sorry, I don't have much experience and I never work on the JavaScript. Actually, very long time back when I worked on it. Right now, I don't remember anything about the JavaScript."
+    },
+    {
+      "turn": 21,
+      "speaker": "Kovi AI",
+      "text": "That's fair. Let's move to C++ then. When you're working with pointers in C++, what's the difference between a null pointer and a dangling pointer, and which one is harder to debug?"
+    },
+    {
+      "turn": 22,
+      "speaker": "Candidate",
+      "text": "No, I never walk under our seatless results."
+    },
+    {
+      "turn": 23,
+      "speaker": "Kovi AI",
+      "text": "Understood. Let me ask about something more fundamental in C++: if you allocate memory using new, what happens if you forget to call delete, and how would that affect a long-running program?"
+    },
+    {
+      "turn": 24,
+      "speaker": "Candidate",
+      "text": "Even though I did not work on the C++, maybe this is a basic fundamental cushion. Suppose if we allocate the memory using the new means, the memory got allocated for that variable. And if we don't delete the domains of the, that memory is a, is a result for that variable only. I think it will result for, I mean, until execution of that program. So, and also I just want to reiterate that whenever we work on the C++."
+    },
+    {
+      "turn": 25,
+      "speaker": "Kovi AI",
+      "text": "Right, so if you don't delete, that memory stays allocated until the program ends, which is a memory leak. Given that we're running low on time, let me go back to Python since that's where you seemed most comfortable. When you write a Python function that modifies a mutable argument like a list, do you think that's good practice, and why or why not?"
+    },
+    {
+      "turn": 26,
+      "speaker": "Candidate",
+      "text": "I think list is the order of collection of elements and in Python, usually we will modify it. Whenever it is required to add a remote elements in that list, we usually do that. we will do that."
+    },
+    {
+      "turn": 27,
+      "speaker": "Kovi AI",
+      "text": "I understand, but my question is different: if a function receives a list as a parameter and modifies it inside the function, does that change persist outside the function, and is that considered good design practice?"
+    },
+    {
+      "turn": 28,
+      "speaker": "Candidate",
+      "text": "It's a very typical question, but I remember that... If I remember correctly, I'm not sure, but... I don't know whether it is past, but a difference or past, my call, in Python. But let me guess this one. For the list kind of objects or whatever the changes that are done in the invoke in work, I mean in working method, the same applies in the invoke method also. So under pureets, I guess, I don't know."
+    },
+    {
+      "turn": 29,
+      "speaker": "Kovi AI",
+      "text": "You're on the right track. Yes, lists are passed by reference, so modifications inside a function do affect the original list outside. Now here's the practical question: if you're writing production code and you receive a list parameter, should you modify it directly or create a copy first, and why?"
+    },
+    {
+      "turn": 30,
+      "speaker": "Candidate",
+      "text": "We will create a copy first because we are modifying in the method itself. We are modifying means that impact will be on the calling method also. So it's not a good practice. If you are touching the sensible information that you get modified and that will impact on the latest stages. of the functionality. So it's better to take a copy of this time than modify the copy value."
+    },
+    {
+      "turn": 31,
+      "speaker": "Kovi AI",
+      "text": "That's solid thinking. Let me ask one more before we wrap up: in Python, when you use a mutable object like a list as a default argument in a function definition, like def add_item(item, my_list=None), why is it dangerous to use my_list=[] instead?"
+    },
+    {
+      "turn": 32,
+      "speaker": "Candidate",
+      "text": "Here we are passing the empty list. created under it is an empty list. So modification will cause the problem here. So I mean, whatever we modified here that will get impacted on the, I mean, even though, I mean, even though I forget modified that last impact on the calling method. So I feel that use my holistic or myelistic, cultural, anti brackets is a dangerous one."
+    },
+    {
+      "turn": 33,
+      "speaker": "Kovi AI",
+      "text": "Exactly right. The default argument is created once when the function is defined, not each time it's called, so modifications persist across calls. That's a classic Python gotcha. Candidate_140, we're at the end of our time slot. You showed solid understanding of Python fundamentals, especially around mutability and scope, though some areas like JavaScript and C++ weren't as familiar. Thanks for your time today."
+    }
+  ],
+  "evaluations": {
+    "kovi_ai_scores": {
+      "communication": 7.5,
+      "problem_solving": 5.8,
+      "domain_expertise": 6.0,
+      "overall_score": 6.4
+    },
+    "human_panel_scores": {
+      "communication": 7.5,
+      "problem_solving": 5.5,
+      "domain_expertise": 6.2,
+      "overall_score": 6.4,
+      "final_verdict": "NO HIRE",
+      "evaluator_notes": "The candidate demonstrated a reasonable understanding of Python fundamentals, especially class and instance variables, list mutability, and the importance of creating copies when modifying input data. However, his knowledge of Java HashMap, JavaScript, and C++ was limited, and he could not demonstrate the expected technical depth across the different areas covered in the interview."
+    }
+  }
+}
