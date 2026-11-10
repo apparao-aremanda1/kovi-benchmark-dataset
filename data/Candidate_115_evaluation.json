@@ -1,6 +1,6 @@
 {
   "session_metadata": {
-    "candidate_alias": "Candidate_115_evaluation",
+    "candidate_alias": "Candidate_115",
     "job_id": "JD-AssociateSE-4352",
     "role": "Associate Software Engineer"
   },
@@ -8,7 +8,7 @@
     {
       "turn": 1,
       "speaker": "Kovi AI",
-      "text": "Hi Candidate_115_evaluation, I am Kovi AI, your AI interviewer today. Could you please briefly explain your last project or academic project and how you utilized technologies like Java, Spring Boot, Python, Flask, or others in it?"
+      "text": "Hi Candidate_115, I am Kovi AI, your AI interviewer today. Could you please briefly explain your last project or academic project and how you utilized technologies like Java, Spring Boot, Python, Flask, or others in it?"
     },
     {
       "turn": 2,

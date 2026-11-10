@@ -1,0 +1,260 @@
+{
+  "session_metadata": {
+    "candidate_alias": "Candidate_124_evaluation",
+    "job_id": "JD-AI-7284",
+    "role": "AI Engineer"
+  },
+  "transcript": [
+    {
+      "turn": 1,
+      "speaker": "Kovi AI",
+      "text": "Hi Candidate_124, I am Kovi AI, your AI interviewer today. Let's dive into a system design problem. Imagine you need to build a multi-modal AI assistant that processes user queries through both text and audio, retrieves relevant context from a knowledge base, and generates responses in real-time using an LLM. How would you architect this system end to end?"
+    },
+    {
+      "turn": 2,
+      "speaker": "Candidate",
+      "text": "Here are two cases. One is of frontend and the backend. And in the frontend side, we can able to send the messages using the audio. Maybe it will able to send the messages to the backend. So if the user is taking the messages messages, maybe sending the messages, or if he can will you type it or you can able to work with the messages. So at the time what I can do is we will implement a whisper to convert the, I mean, I can say, open here a whisper to convert the audio messages into the text and then we will pass the message to the backend. In the back end, we will do the, maybe we'll have a, some, we'll have a node where it can pop. First it will do these activities. First it will send it to the LLM and ask them to rephrase the question. And after that, our second step, which will do is, it will create a chance for it. I mean, embeddings for it. And these embeddings will be, we'll do the semantics that we'll do the semantics over the vector database. So depends on the number of queries that we can expect. We can desert our vector database. Suppose if there is a huge number of millions of requests, maybe we can go with some strong and hard ones. Otherwise, maybe if we are not dealing with the million, if we are not dealing with the million, maybe one lakh account, a thousand subfold PDF files, then reach the icon. If it is to be the huge number of documents, millions of documents. Maybe we'll go with the PC vector or something like that. So we will do the semantics and before changing for amputees we will use the open here, amputee, modal, small modal only. And the number of tokens that we are passing is depends on the actually we will after identifying the the socable you know after identifying the the top five ranking answers from the vector database, we will pass it to the LLM. The corresponding chance will be passed as LLM private tokens. And the LLM will decide which one is the best which one is the best one. And based on that one, we will do the auto recurction game. So we will do the auto recurction from the maximum three items. And even these three and so we did not find the other appropriate answer we'll pass it to the we'll pass it to the we can say our fall back note and if it is successful then we will send back to the user so the server will plan and to send back to the user also maybe we can use the server side even so that approach"
+    },
+    {
+      "turn": 3,
+      "speaker": "Kovi AI",
+      "text": "Okay, I hear you. So you're describing a retrieval-augmented generation pipeline with audio input, embedding-based search, and an LLM refinement step. Let me probe deeper here. You mentioned rephrasing the question first, then creating embeddings, then doing semantic search. But here's my question: if you rephrase the user's question before embedding it, aren't you changing the semantic meaning potentially, and wouldn't that affect what you retrieve from the vector database? Why rephrase before embedding instead of embedding the original query?"
+    },
+    {
+      "turn": 4,
+      "speaker": "Candidate",
+      "text": "This is because the query is coming from the user. So the user might not aware of, maybe it might have some theoretical mistakes, or it can be less spelling mistakes, or anything is there. So anything possible is there. So if you reference the question, maybe that question will be a formal correctly. Maybe so that's what either, I just want to reference the question before it is doing the semantic search."
+    },
+    {
+      "turn": 5,
+      "speaker": "Kovi AI",
+      "text": "That makes sense, you're cleaning up the query first. But here's the concrete issue: if the user asks \"how do cats sleep,\" and your LLM rephrases it to \"feline sleep patterns and mechanisms,\" you've now changed the intent slightly. What if your vector database has documents about \"cat napping behavior\" but not \"feline sleep patterns\"? How do you handle the case where rephrasing actually hurts retrieval accuracy instead of helping it?"
+    },
+    {
+      "turn": 6,
+      "speaker": "Candidate",
+      "text": "Actually, in this case, we will change the, we will ask the other one too. Chuck, is there any, is there any, is there any, is there any, is there any, is there any, is there any, is there any, of raising issues? So only just to look at them under a reference in according to that, that's it only. We won't ask them to change it or change the intention also. under in the prompt itself we will mention that wrong change in tension of the question try to refresh this if there is any mistakes up there."
+    },
+    {
+      "turn": 7,
+      "speaker": "Kovi AI",
+      "text": "Got it, so you'd constrain the LLM's rephrasing with a prompt instruction to preserve intent. That's practical. Now let's talk about your vector database choice. You mentioned Pinecone for millions of documents and pgvector for smaller datasets. But pgvector runs inside PostgreSQL, which means your embeddings and relational data live in the same database. What's the actual trade-off you're making there in terms of query latency and infrastructure complexity when you have to do a semantic search plus a join to get metadata?"
+    },
+    {
+      "turn": 8,
+      "speaker": "Candidate",
+      "text": "No, actually, my intention is if there is a huge database, maybe huge number of documents, it's better to go into the pgvector in the PostgreSQL scale. If there is a considerable number of vectors like maximum 1 million number of documents, maybe it's better to go into the pinecone. So that's what I mentioned."
+    },
+    {
+      "turn": 9,
+      "speaker": "Kovi AI",
+      "text": "I think you might have flipped that. Pinecone is a managed vector database built for scale, so it handles millions efficiently. PostgreSQL with pgvector is better for smaller, more integrated datasets where you need relational data alongside vectors. For a million documents, wouldn't Pinecone or Weaviate be the better choice over pgvector due to query speed and distributed indexing?"
+    },
+    {
+      "turn": 10,
+      "speaker": "Candidate",
+      "text": "Yeah, maybe you're right, actually, you're right, and I'm going to revert my statement. For the Python, we can change it. We can use it for the huge number of documents and further. Constable number of documents will go into the P"
+    },
+    {
+      "turn": 11,
+      "speaker": "Kovi AI",
+      "text": "Okay, good. So pgvector for smaller datasets, Pinecone or Weaviate for scale. Now let's move to your backend architecture. You mentioned passing the top five retrieved documents as context to the LLM. But what happens if those five documents are contradictory or have conflicting information? How does your system decide which one is most reliable, and do you validate the LLM's final answer against the source documents before returning it to the user?"
+    },
+    {
+      "turn": 12,
+      "speaker": "Candidate",
+      "text": "I will try to do it like this. First, I will identify the top five results and from the vector database and I will pass those results to the LLM and try to identify the best possible answer for it. So, LLM will decide the best possible answer and we will re-verify it with the re-verify it again by saying this is the question and this is answer identified answer for the best possible answer. Now, so is this is a sort of a answer? Or is there any, how much you satisfy for this answer? So based on that satisfaction level, we will pass it to the file and we will give it to our direction approach. How we will, we will send it back to the user if it satisfies if the answer is satisfied. So I use the element as a judge for this one."
+    },
+    {
+      "turn": 13,
+      "speaker": "Kovi AI",
+      "text": "So you're using the LLM as a judge to rate its own answer's confidence. That's circular reasoning though, isn't it? The LLM generates the answer, then you ask it to judge itself. What if the LLM is confidently wrong? How would you catch that with an external validation mechanism instead of asking the same model to verify itself?"
+    },
+    {
+      "turn": 14,
+      "speaker": "Candidate",
+      "text": "I won't ask for the same model. Maybe I can use some different and some more tough model for this one. For example, first I will use the anthropic high tool. For LLM as a J I will use the another model which is bit costly, which has the... I will use another model for it. So that's what I can plan that one."
+    },
+    {
+      "turn": 15,
+      "speaker": "Kovi AI",
+      "text": "Good, using a different model for verification adds some robustness. But now you're calling two LLMs sequentially, which doubles latency and cost. For a real-time assistant, that could be problematic. How would you optimize this pipeline to keep response time acceptable while still maintaining that verification layer? Would you run them in parallel, or would you only invoke the second model when confidence is below a certain threshold?"
+    },
+    {
+      "turn": 16,
+      "speaker": "Candidate",
+      "text": "It's not possible to run it parallel because after completion of one step, we can only proceed for the next step. So maybe if the latency is the problem, I have to look for some different approach like I don't know, maybe I have to think about something different approach for it. I don't know. Maybe I will reduce the number of iterations for the auto-re-correction. And the second one is if the satisfactory level is, I will define some threshold for it. And if the threshold level and if the identified answer is less than the threshold level, we will ask for the second model to reject it again. So if it is also less than that, then only it will go to the, Then only we will go for the hard-body correction approach. Or if we take, if it reaches the threshold level or if it is over the threshold level, we will thank you to the user."
+    },
+    {
+      "turn": 17,
+      "speaker": "Kovi AI",
+      "text": "That's smarter, using a threshold to conditionally invoke the expensive model. Now let's talk about your frontend. You mentioned using Next.js and sending audio to the backend. How would you handle streaming the LLM response back to the user in real-time? Would you use Server-Sent Events, WebSockets, or something else, and why?"
+    },
+    {
+      "turn": 18,
+      "speaker": "Candidate",
+      "text": "I prefer to go with the server sent events, so when the response is ready, we will even get triggered, and it will be passed back to the message will be sent back to the client, so that's what I'm planning. I can plan that approach."
+    },
+    {
+      "turn": 19,
+      "speaker": "Kovi AI",
+      "text": "Server-Sent Events works for one-way streaming from server to client. But what if the user interrupts mid-response or sends a new query while the first response is still streaming? How do you manage connection state and cancel the ongoing stream without leaving orphaned requests on the backend?"
+    },
+    {
+      "turn": 20,
+      "speaker": "Candidate",
+      "text": "What I'm thinking is, suppose whenever each and every state will hear, we are saying that each and every state to the state into the database, PostgreSQL. So whenever in the middle of the term, there is a new message that comes to write to the state with the new response. I mean, new input. So, our quality of the world will send the response back."
+    },
+    {
+      "turn": 21,
+      "speaker": "Kovi AI",
+      "text": "I'm not entirely following. You're storing state in PostgreSQL for each message. But that doesn't answer how you signal the backend to stop processing the old stream when a new message arrives. Do you send a cancel signal, or does the client just close the connection and the backend keeps computing? What prevents wasted compute on abandoned requests?"
+    },
+    {
+      "turn": 22,
+      "speaker": "Candidate",
+      "text": "I prefabbed the cancer in the signal."
+    },
+    {
+      "turn": 23,
+      "speaker": "Kovi AI",
+      "text": "Good, so you'd send a cancel signal. Now let's shift to data persistence and consistency. You have audio files, embeddings, conversation history, and metadata all living in different places potentially. How do you ensure consistency when a user deletes a conversation? Do you cascade delete from PostgreSQL, the vector database, and any storage buckets in GCP, and how do you handle partial failures in that cleanup?"
+    },
+    {
+      "turn": 24,
+      "speaker": "Candidate",
+      "text": "No, actually we are not deleting the Intel history in the database. We can maybe that history is required for the next queries. the new session in well in a new session opens. So only what the current request only will get cancelled. That's a lot of planning."
+    },
+    {
+      "turn": 25,
+      "speaker": "Kovi AI",
+      "text": "Understood, you keep history for context in future sessions but cancel the current request. That's reasonable. But here's the edge case: if you're storing embeddings in Pinecone and conversation metadata in PostgreSQL, and a user starts a new session, how do you efficiently retrieve only the relevant past conversations to seed context without querying all historical embeddings every time? Do you filter by user ID first in PostgreSQL, then fetch embeddings, or query embeddings directly?"
+    },
+    {
+      "turn": 26,
+      "speaker": "Candidate",
+      "text": "The thing is, I will prove this way. So, all the history data will be searing into the PostgreSQL. And when I was a new session movement, he looked for some requests. I will ask the overview of the request. I will take the worry of the previous queries. I am based on this query. So, this is a query. I am just going to say, for the previous stage regarding this or something like that. And we will fetch that to all of you only from the from the DB. That's what I can say."
+    },
+    {
+      "turn": 27,
+      "speaker": "Kovi AI",
+      "text": "Okay, so you'd query PostgreSQL for past conversations, then use those to inform the current session. Makes sense. Let me ask about scaling now. You're using FastAPI for your backend. If you get ten thousand concurrent users, each with streaming responses and database queries, how do you scale horizontally? Do you use load balancing, worker pools, async task queues, and how does session state stay consistent across multiple backend instances?"
+    },
+    {
+      "turn": 28,
+      "speaker": "Candidate",
+      "text": "Actually, I thought of using the Kubernetes for this one. So when there is a huge number of requests, it will scale up and there is a less number of requests, it will scale down. So that's what I can think."
+    },
+    {
+      "turn": 29,
+      "speaker": "Kovi AI",
+      "text": "Kubernetes handles scaling containers, but that's infrastructure. The real question is about your application logic. If you have three FastAPI instances behind a load balancer and a user's request lands on instance A, then their follow-up lands on instance B, how do you ensure instance B knows about the conversation state from instance A? Do you store session state in a shared cache like Redis, or do you rely on the database for every lookup?"
+    },
+    {
+      "turn": 30,
+      "speaker": "Candidate",
+      "text": "In such scenarios, it's better to look at the radius. We'll keep that session state in the radius and we'll retrieve it from there. So irrespective of how many instances are there, all these look at the all these things. So, I am a home engineer. So, all these look at the is and they will pick the state and they will process from there."
+    },
+    {
+      "turn": 31,
+      "speaker": "Kovi AI",
+      "text": "Good, Redis for shared session state across instances. Now, one more critical question on this. Redis is in-memory, so if Redis crashes, you lose all active session state. Do you persist Redis to disk, use Redis Cluster for redundancy, or accept that loss and force users to restart their conversation?"
+    },
+    {
+      "turn": 32,
+      "speaker": "Candidate",
+      "text": "We should not lose that if the ready fails, we should ask the ready. So each and every time, maybe we will try to go. We will keep the ready cluster for the redundancy. That's what I can plan."
+    },
+    {
+      "turn": 33,
+      "speaker": "Kovi AI",
+      "text": "Redis Cluster for redundancy makes sense. Now let's talk about your embedding model choice. You mentioned using OpenAI's embedding model. But OpenAI charges per token for embeddings, and at scale with millions of documents, that gets expensive fast. Have you considered using open-source models like those from HuggingFace instead, and what's the trade-off you'd accept between cost and embedding quality?"
+    },
+    {
+      "turn": 34,
+      "speaker": "Candidate",
+      "text": "It's not the user is not expecting the excellent accuracy, which under there they have the limited adjustments so we should better go with the, some hacking phase instead or something like that."
+    },
+    {
+      "turn": 35,
+      "speaker": "Kovi AI",
+      "text": "So you'd use HuggingFace for cost savings when accuracy requirements are moderate. That's practical. But here's the real trade-off: HuggingFace models are smaller and faster but produce lower quality embeddings. If your retrieval quality drops, your LLM gets worse context, and your final answers suffer. How do you measure and monitor embedding quality degradation in production to know if you've crossed an unacceptable threshold?"
+    },
+    {
+      "turn": 36,
+      "speaker": "Candidate",
+      "text": "So that's also problem. So maybe we should have, if there is a huge number of documents and there is a budget, also, some more constant means maybe we should look for something, some less costly approach. I don't know is there any other embedding models are there? Instead of going for the open AI and I can use a game phase model. So it depends on how to look for something better options for it."
+    },
+    {
+      "turn": 37,
+      "speaker": "Kovi AI",
+      "text": "You're right to think about options. There are models like Cohere, Jina, and others. But you're sidestepping the core issue: how do you actually measure if embedding quality is acceptable in production? Do you have a ground truth dataset of queries and expected documents you can use to benchmark retrieval precision and recall, or do you just rely on user feedback when results are bad?"
+    },
+    {
+      "turn": 38,
+      "speaker": "Candidate",
+      "text": "No, actually before going to the production itself we will rewrite, we will evaluate the answers and we will maintain a some threshold like 95% this accuracy level. So based on the accuracy limits, then only we will go to the production. So that's what I'm thinking. I can go for the other approaches."
+    },
+    {
+      "turn": 39,
+      "speaker": "Kovi AI",
+      "text": "That's pre-production testing, which is good. But production data drifts over time. Your documents change, user queries evolve, and embedding quality can degrade silently. Do you have a monitoring pipeline in place to continuously measure retrieval quality in production, or do you only check once before launch and assume it stays good?"
+    },
+    {
+      "turn": 40,
+      "speaker": "Candidate",
+      "text": "In the production itself, we will maintain a data dock and we will continuously look for the quality of the output and we can verify it. We need to verify that we need to verify it in the production also."
+    },
+    {
+      "turn": 41,
+      "speaker": "Kovi AI",
+      "text": "Good, continuous monitoring in production. Now we're running low on time, so let me ask one final architectural question. Your system has many moving parts: audio processing, embeddings, vector search, LLM calls, PostgreSQL, Redis, GCP storage. If one component fails, how do you handle graceful degradation? For example, if Pinecone is down but PostgreSQL is up, can you still serve a user, or does the entire system fail?"
+    },
+    {
+      "turn": 42,
+      "speaker": "Candidate",
+      "text": "If we have the dependency on what was failed, maybe it will pass to the fallback mode. And the corresponding masses will be sent to the user. So that's how I can blend."
+    },
+    {
+      "turn": 43,
+      "speaker": "Kovi AI",
+      "text": "That's vague. Let me be concrete: if your vector database is down, can you still answer user queries using just PostgreSQL and the LLM, or do you tell the user to wait? And if you do serve without vector search, how does the LLM know which documents are relevant without embeddings?"
+    },
+    {
+      "turn": 44,
+      "speaker": "Candidate",
+      "text": "Yeah, actually, suppose we never approach the vector database is a primary one. So if it fails means we can't process the user query. So we will say that there's something around in our center, otherwise on software failure issue. Please wait for some time, such kind of issues, and we'll try to recover. We'll try to make our vector databases a person as possible. So that's what we can do at the time."
+    },
+    {
+      "turn": 45,
+      "speaker": "Kovi AI",
+      "text": "Understood. You'd gracefully degrade to an error message rather than serve stale results. That's honest. Alright , we're at our time limit. You've covered a solid end-to-end design: multi-modal input with Whisper, query refinement, semantic search with vector databases, LLM-based answer generation with verification, streaming responses via SSE, session state in Redis, horizontal scaling with Kubernetes, and graceful degradation on failures. You showed practical thinking on trade-offs between cost and quality, and you caught yourself on database choices. Well done. Thanks for the thorough discussion today."
+    },
+    {
+      "turn": 46,
+      "speaker": "Candidate",
+      "text": "(Candidate was silent or audio was unclear)"
+    },
+    {
+      "turn": 47,
+      "speaker": "Kovi AI",
+      "text": "Thanks again for walking through this system design with me, Candidate_124. You demonstrated solid architectural thinking, practical problem-solving, and willingness to reconsider your choices when challenged. Best of luck with your interview process. Take care!"
+    }
+  ],
+  "evaluations": {
+    "kovi_ai_scores": {
+      "communication": 6.5,
+      "problem_solving": 7.0,
+      "domain_expertise": 7.5,
+      "overall_score": 7.0
+    },
+    "human_panel_scores": {
+      "communication": 6.3,
+      "problem_solving": 7.2,
+      "domain_expertise": 7.3,
+      "overall_score": 6.9,
+      "final_verdict": "HIRE",
+      "evaluator_notes": "The candidate have good knowledge in system design and explained end-to-end AI architecture, vector databases, and Redis caching properly. Even though he made some mistakes in vector database tradeoffs at first, he corrected himself and showed strong problem solving."
+    }
+  }
+}
