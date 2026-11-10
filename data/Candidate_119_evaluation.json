@@ -1,0 +1,160 @@
+{
+  "session_metadata": {
+    "candidate_alias": "Candidate_119",
+    "job_id": "JD-DBAdmin-8298",
+    "role": "Senior Database Administrator"
+  },
+  "transcript": [
+    {
+      "turn": 1,
+      "speaker": "Kovi AI",
+      "text": "Hi Candidate_119, I am Kovi AI, your AI interviewer today. Let's dive into some technical depth on the technologies you'll be supporting at this level. To start, can you walk me through how you would approach diagnosing a PostgreSQL query that's consuming excessive CPU and memory on a production RHEL system, and what specific tools or commands you'd use to isolate the root cause?"
+    },
+    {
+      "turn": 2,
+      "speaker": "Candidate",
+      "text": "Let's see if this is the whole stuff."
+    },
+    {
+      "turn": 3,
+      "speaker": "Kovi AI",
+      "text": "I'm not sure what you mean by that. Are you asking if we should cover all the major technologies in this interview, or do you need a moment to gather your thoughts before we start? Let me rephrase the question to make it clearer: when you encounter a slow PostgreSQL query in production, what's your first diagnostic step?"
+    },
+    {
+      "turn": 4,
+      "speaker": "Candidate",
+      "text": "I will review my database lab. Also, I will check the easy stats activity table on the table where connected to the language and execution of the CPU. Also, PSH-NEF, WebGrip, PostgreSQL, also we can see connected applications. And also, top command, we can see CPU, that we will be offering and also I will check Db. And the easy stats table we can ask for statement we can identify CPU because it's got it and also identify high CPU voice. I bet I don't want to answer what Aleda. One is the maximum 7 seconds we can. Set it."
+    },
+    {
+      "turn": 5,
+      "speaker": "Kovi AI",
+      "text": "Okay, I hear you mentioning pg_stat_statements and the top command, which are solid starting points. But let me cut to the specifics: if you're looking at pg_stat_statements and you see a query with high CPU consumption, what exact columns in that view would you check first to determine whether the problem is poor query planning or actual execution inefficiency, and why those columns specifically?"
+    },
+    {
+      "turn": 6,
+      "speaker": "Candidate",
+      "text": "I can verify, if it detects or use it or not properly, if I will review the table data, I will stretch it, I will review the table structure and then it says. So those queries are using the query, X-plane plan, I will review X-plane plan. Next plan, I can see what is the plan with the logic for that query. So if any index is not used, I can create the index. Already, Nexus have used to maybe we'll review the data how much data. So where is the change in this? Hi, X-Men, Sue. Well, probably we haven't. Hi, X-Men, so our person, I will review."
+    },
+    {
+      "turn": 7,
+      "speaker": "Kovi AI",
+      "text": "I understand you're talking about EXPLAIN PLAN to analyze query execution. Let me focus this: when you run EXPLAIN ANALYZE on a slow query and you see that a sequential scan is being chosen over an index scan even though an index exists on that column, what specific statistics or planner settings would you check, and what would you actually modify to force the planner to reconsider?"
+    },
+    {
+      "turn": 8,
+      "speaker": "Candidate",
+      "text": "I will go to the query class and I will see if already index are used in three-year-testicking size CPU, I will check statistics when it is updated. If it is not updated, I will update the status-con use 3-year test taking size CPU. I will check statistics when it is updated. If it's not updated, I will update the status and I will execute again plan. If cost is same again, we can change the more quality verification."
+    },
+    {
+      "turn": 9,
+      "speaker": "Kovi AI",
+      "text": "Alright, so you're checking if statistics are stale and running ANALYZE to refresh them. That's correct. But here's a concrete scenario: you've just run ANALYZE, the stats are fresh, but the planner still chooses a sequential scan over your index on a WHERE clause. The index exists, statistics are current, but the planner's cost model says the seq scan is cheaper. What specific PostgreSQL parameters would you adjust, and why would changing those parameters actually force a different plan choice?"
+    },
+    {
+      "turn": 10,
+      "speaker": "Candidate",
+      "text": "PostgreSQL, and PostgreSQL, configuration, finally we can see them. We can verify what the configuration, we can change postgreSQL. Let's clear your configuration, we can change parameters. Also, we can increase, and if we do start things, we can evaluate the settings."
+    },
+    {
+      "turn": 11,
+      "speaker": "Kovi AI",
+      "text": "I need you to be more specific. Which exact PostgreSQL parameters control the planner's cost decisions? For example, are you talking about random_page_cost, seq_page_cost, or cpu_tuple_cost? Name one specific parameter you would adjust in this scenario and explain exactly how changing it would influence the planner's decision between sequential scan and index scan."
+    },
+    {
+      "turn": 12,
+      "speaker": "Candidate",
+      "text": "The frequency scan will take 1 by 1 slowly and hash to the 3 faster."
+    },
+    {
+      "turn": 13,
+      "speaker": "Kovi AI",
+      "text": "That's not answering my question. Let me be direct: in postgresql.conf, there is a parameter called random_page_cost. What does that parameter do, and if you lowered it from its default value of 4.0 to 1.0, how would that change the planner's cost calculation for index scans versus sequential scans?"
+    },
+    {
+      "turn": 14,
+      "speaker": "Candidate",
+      "text": "I'm not aware of this. Can you ask me another question please? I'm the topic."
+    },
+    {
+      "turn": 15,
+      "speaker": "Kovi AI",
+      "text": "Fair enough. Let me shift gears. You're supporting IBM DB2 at this level. Walk me through the steps you would take to identify and resolve table lock contention on a heavily accessed table in DB2, and what specific DB2 commands or views you'd use to diagnose it."
+    },
+    {
+      "turn": 16,
+      "speaker": "Candidate",
+      "text": "The Google Apps sub, two types, one is deadlocks, and lock weights. If your lock, roll-locking is not sufficient, then it will switch to Tablelock. Or any condition on the West, on the West, on the West, straight window, so it will take that Tablelock. I can insist my I love Coro Valley in the DBC actually, so that we can provide the most space for Coro Valley."
+    },
+    {
+      "turn": 17,
+      "speaker": "Kovi AI",
+      "text": "I understand you're mentioning lock escalation from row-level to table-level locks. But let me ask more directly: in DB2, what is the specific system catalog view or command you would query to see which sessions currently hold locks on a table, and what columns in that view tell you whether those locks are blocking other transactions?"
+    },
+    {
+      "turn": 18,
+      "speaker": "Candidate",
+      "text": "In DB2.co, I will use DB2.co to get it, and that we can see the option."
+    },
+    {
+      "turn": 19,
+      "speaker": "Kovi AI",
+      "text": "You're referencing DB2 commands, but I need the exact view name. In DB2, is it MON_GET_LOCKS or SYSCAT.LOCKS or something else? What is the precise system catalog table or function you would query to see active locks and which session IDs are holding them?"
+    },
+    {
+      "turn": 20,
+      "speaker": "Candidate",
+      "text": "I really use mono to get gloves."
+    },
+    {
+      "turn": 21,
+      "speaker": "Kovi AI",
+      "text": "Okay, so you're saying MON_GET_LOCKS. That's the right direction. Now, when you run that function and you see a lock being held, what specific columns in the output tell you which application or session is holding that lock, and what columns show you which other sessions are waiting on it?"
+    },
+    {
+      "turn": 22,
+      "speaker": "Candidate",
+      "text": "Can you ask me a question please?"
+    },
+    {
+      "turn": 23,
+      "speaker": "Kovi AI",
+      "text": "Let me ask you this: on a RHEL or SUSE Linux system, if a PostgreSQL process is consuming excessive memory and you need to identify which query or connection is responsible, what shell command would you run to get that granular process-level memory breakdown, and how would you correlate that back to the specific PostgreSQL backend process?"
+    },
+    {
+      "turn": 24,
+      "speaker": "Candidate",
+      "text": "I'm not going to be able to do that. I'm not going to do that. I'm not going to do that. Within the community, we are in our community. My understanding of real-time, is in the sense of conditioning, meaning of the question about what's happening. Only in our community, what's happening in the community in our community. There is nothing going on in the community. It's not a very serious problem, but it's not going to be easier to do it, but it's not going to happen. ? Okay. So, I also hope that the first floor will be able to get into the next floor. So, I hope that it's important to be able to get in the next floor. And the next floor is going to be the first floor."
+    },
+    {
+      "turn": 25,
+      "speaker": "Kovi AI",
+      "text": "Candidate_119, I appreciate your time, but I need to be straightforward with you. We're about fifteen minutes into this technical deep dive, and I'm not getting clear, concrete technical answers on core database administration tasks like query diagnostics, lock management, or process monitoring. These are fundamental skills for a Senior DBA role supporting PostgreSQL and DB2 at L3 support level. Let me ask one final direct question to see if we can clarify your hands-on experience: have you actually worked with PostgreSQL pg_stat_statements or IBM DB2 MON_GET_LOCKS in a production environment, or are these tools unfamiliar to you?"
+    },
+    {
+      "turn": 26,
+      "speaker": "Candidate",
+      "text": "Actually, I tried PostgreSQL and I used the Grand"
+    },
+    {
+      "turn": 27,
+      "speaker": "Kovi AI",
+      "text": "Okay, so you have worked with PostgreSQL. Let me stop here and wrap up. Candidate_119, thank you for your time today. Based on this technical deep dive, I'd recommend taking time to solidify your hands-on knowledge of PostgreSQL diagnostic tools like pg_stat_statements, EXPLAIN ANALYZE, and the specific planner parameters, as well as DB2 lock management commands. These are critical for a senior-level support role. Best of luck with your preparation."
+    }
+  ],
+  "evaluations": {
+    "kovi_ai_scores": {
+      "communication": 3.0,
+      "problem_solving": 3.0,
+      "domain_expertise": 4.0,
+      "overall_score": 3.3
+    },
+    "human_panel_scores": {
+      "communication": 3.0,
+      "problem_solving": 3.0,
+      "domain_expertise": 4.0,
+      "overall_score": 3.3,
+      "final_verdict": "NO HIRE",
+      "evaluator_notes": "The candidate have some basic idea about database tools like top command and stats, but he unable to explain deep technical things like postgresql cost parameters and db2 locks. Because his technical depth and problem solving skills is not matching for a senior DBA role.."
+    }
+  }
+}

@@ -1,0 +1,210 @@
+{
+  "session_metadata": {
+    "candidate_alias": "Candidate_122",
+    "job_id": "JD-ORACLEERP-7429",
+    "role": "Senior Oracle ERP QA Test Specialist"
+  },
+  "transcript": [
+    {
+      "turn": 1,
+      "speaker": "Kovi AI",
+      "text": "Hi Candidate_122, I am Kovi AI, your AI interviewer today. Let's dive into some technical specifics around Oracle ERP testing. Can you walk me through your hands-on experience with Oracle Apps R12, and specifically what testing challenges you've encountered when working with its core modules like Accounts Payable or General Ledger?"
+    },
+    {
+      "turn": 2,
+      "speaker": "Candidate",
+      "text": "We have been working in Oracle, we have been working for the past several years and the government and HR are the same in finance motives. I may share our knowledge to perform the functional testing on the standard components as well as the enhancement. And it fixes that for the least we are working on. during the pack's sake."
+    },
+    {
+      "turn": 3,
+      "speaker": "Kovi AI",
+      "text": "I appreciate that context, but let me get more specific. When you say you've done functional testing on Oracle Apps R12 components, can you give me one concrete example of a specific test case you built?for instance, did you test a purchase requisition workflow, an invoice matching process, or something else?and what tool did you actually use to automate or execute that test?"
+    },
+    {
+      "turn": 4,
+      "speaker": "Candidate",
+      "text": "In specific to an example, I have tested the purchase requisition flow, a purchase or a creation, and the invoice matching process as well as the payment against the invoice. So usually, we performed a manual testing. There is no telescope of linear automation in our current project. So that's a manual testing process."
+    },
+    {
+      "turn": 5,
+      "speaker": "Kovi AI",
+      "text": "Got it, so you've done manual testing on those P2P processes. Since this role is for a Senior QA Test Specialist and the job description includes automation tools like UFT, Selenium, and HP ALM, I need to understand your automation experience better. Have you actually written automated test scripts using any of those tools, or is your background primarily manual testing only?"
+    },
+    {
+      "turn": 6,
+      "speaker": "Candidate",
+      "text": "Prior to Oracle E-Apprit testing, I have an annual testing on the various components, related to web applications and the available applications, etc. During the process, I have worked on UFT, Selenium, NHP, ALM tools, to automate the test scenarios. When I started working on Oracle E-Apprit testing, there is no scope for the automation. That's the reason in the current process I haven't used any the automation tool but these prior to working with the IP above on the selenium ear tools and I have created the automation test scripts and I have created the test design and executed and you know, project those test results to our deals."
+    },
+    {
+      "turn": 7,
+      "speaker": "Kovi AI",
+      "text": "Okay, so you have prior experience with UFT and Selenium. Let me ask you directly: when you built automation scripts in Selenium, what programming language did you use?was it Java, Python, or something else?and can you describe one specific challenge you ran into when trying to locate and interact with a web element?"
+    },
+    {
+      "turn": 8,
+      "speaker": "Candidate",
+      "text": "I have used Selenium in order to develop my description. One particular challenge that we need is I don't depend on a very well related to our checkbox. We are not being identified with code that we are trying to use. The same challenge has been faced while using the UFT as well. the alternate solution that was developed is, I know, to identify that particular checkbox using a manual logic written by us and then I didn't write that object into the click-click. In the tool that we have used to automate the script is Java. In myself, you have tea, it is document."
+    },
+    {
+      "turn": 9,
+      "speaker": "Kovi AI",
+      "text": "That's interesting. So you wrote custom logic to handle the checkbox identification issue. Let me probe that a bit deeper: when you say you wrote manual logic to identify the checkbox, did you use XPath, CSS selectors, or some other method to locate it, and what exactly made the standard approach fail in that case?"
+    },
+    {
+      "turn": 10,
+      "speaker": "Candidate",
+      "text": "We have used both the SSSL and HPA, the two identified, which is the best logic that can be used across the scripts. Also, it should be a standalone logic. It's a reusable logic, so wherever we have the kind of problem we can go ahead and simply call that particular logic and then use the logic to execute the scripts. So, while doing it via the standard approach is not able to identify the particular check box."
+    },
+    {
+      "turn": 11,
+      "speaker": "Kovi AI",
+      "text": "I hear you on reusability, but I need clarity here. When you say the standard approach failed to identify the checkbox, what do you mean by \"standard approach\"?are you talking about basic XPath or CSS selectors that Selenium provides out of the box? And when you built this custom logic, did you use Selenium's built-in methods like findElement, or did you write something completely outside of Selenium's API?"
+    },
+    {
+      "turn": 12,
+      "speaker": "Candidate",
+      "text": "While using the standard approach, you try to record the actions on your page and then try to be played in a fixed-year risk. That is where it is not able to recognize that particular checkbox to click it. That's where we have the custom logic and we did use a file element method to achieve this functionality. Thank you."
+    },
+    {
+      "turn": 13,
+      "speaker": "Kovi AI",
+      "text": "Right, so you used findElement with your custom XPath or CSS logic. Now let me shift gears?you mentioned working with Oracle Apps R12, and I want to understand your SQL knowledge since that's critical for Oracle testing. Can you tell me what an Oracle database synonym is and why a QA tester would need to know about it when testing Oracle Apps?"
+    },
+    {
+      "turn": 14,
+      "speaker": "Candidate",
+      "text": "Oracle Database is nothing but where all the information is getting stored. In the PerradQ and Tested is obviously necessary to run on Oracle Database because most of the pages or the functionality that you will get started into the database and you need to know where exactly it is. it might be chances of we are missing in setting up the data into the database. We have to make sure the data is a unique across the front and in the background applications."
+    },
+    {
+      "turn": 15,
+      "speaker": "Kovi AI",
+      "text": "You're touching on data validation, which is important. But I asked specifically about Oracle database synonyms?that's a technical feature in Oracle. Do you know what a synonym is in Oracle, and have you actually used one when querying tables in SQL Developer or writing test data setup scripts?"
+    },
+    {
+      "turn": 16,
+      "speaker": "Candidate",
+      "text": "Oracle database, Selenium is nothing but an alternative name. It's like our database table or something like that. The database table is too very most of the data from the backend with it. For my distinct standpoint."
+    },
+    {
+      "turn": 17,
+      "speaker": "Kovi AI",
+      "text": "Okay, so you have a basic understanding. Let me ask you more directly: in Oracle Apps R12, there are often FND tables and custom tables. If you needed to write a SQL query in SQL Developer to check if a purchase order was created correctly in the database, what schema would you query, and what table would you look at?"
+    },
+    {
+      "turn": 18,
+      "speaker": "Candidate",
+      "text": "In order to check whether the bunch is not over-sched, we did correctly or not, I rather use the table."
+    },
+    {
+      "turn": 19,
+      "speaker": "Kovi AI",
+      "text": "You started to say a table name but didn't finish. Which specific table in Oracle Apps would you query to verify a purchase order was created? For example, is it PO_HEADERS, PO_LINES, or something else?"
+    },
+    {
+      "turn": 20,
+      "speaker": "Candidate",
+      "text": "It's..."
+    },
+    {
+      "turn": 21,
+      "speaker": "Kovi AI",
+      "text": "Take your time. Which table stores purchase order header information in Oracle Apps R12?"
+    },
+    {
+      "turn": 22,
+      "speaker": "Candidate",
+      "text": "Pivo headers on."
+    },
+    {
+      "turn": 23,
+      "speaker": "Kovi AI",
+      "text": "Good, PO_HEADERS. Now, if you wanted to filter that query to find only purchase orders created in the last 24 hours, what SQL clause would you add to your WHERE condition to check the creation date?"
+    },
+    {
+      "turn": 24,
+      "speaker": "Candidate",
+      "text": "We can use a creation date to query the budget orders that I created in the last 24 hours."
+    },
+    {
+      "turn": 25,
+      "speaker": "Kovi AI",
+      "text": "That's vague. Give me the actual SQL syntax?what specific WHERE clause would you write using SYSDATE or TRUNC to filter records from the last 24 hours?"
+    },
+    {
+      "turn": 26,
+      "speaker": "Candidate",
+      "text": "OK, so let's start from viewhead as all where the state is equal to current date. Or trunk of the state is equal to trunk of current date."
+    },
+    {
+      "turn": 27,
+      "speaker": "Kovi AI",
+      "text": "That's close, but that only gets today's records. To get the last 24 hours, you'd need to subtract a day from SYSDATE. Can you write out the exact WHERE clause syntax using SYSDATE minus an interval?"
+    },
+    {
+      "turn": 28,
+      "speaker": "Candidate",
+      "text": "Yes."
+    },
+    {
+      "turn": 29,
+      "speaker": "Kovi AI",
+      "text": "I'm waiting for the actual syntax. Write it out: what does the WHERE clause look like when you subtract 24 hours or 1 day from SYSDATE in Oracle SQL?"
+    },
+    {
+      "turn": 30,
+      "speaker": "Candidate",
+      "text": "Let's start from POO headers all where Trunk Ops is due is."
+    },
+    {
+      "turn": 31,
+      "speaker": "Kovi AI",
+      "text": "I need you to complete that thought. What comes after the equals sign? Show me the full condition to filter records from the last 24 hours using SYSDATE."
+    },
+    {
+      "turn": 32,
+      "speaker": "Candidate",
+      "text": "Next, let's start from view I resolve, which is JITE. Let's just take this equal to the state minus 1."
+    },
+    {
+      "turn": 33,
+      "speaker": "Kovi AI",
+      "text": "Okay, so CREATION_DATE >= SYSDATE minus 1 is the right direction. Now let me ask you this: in Oracle Apps R12, when you're testing the invoice matching process you mentioned earlier, you'd need to query the AP_INVOICES table. If an invoice is in hold status and you need to release it via SQL, what UPDATE statement would you write, and more importantly, why would you hesitate to do that directly in production?"
+    },
+    {
+      "turn": 34,
+      "speaker": "Candidate",
+      "text": "If you haven't used anything, I'm updating the invoice from the backend table you will rather do it from the front end to report releasing the whole unparticular invoice. And during this directly, the production we have intact because the query uses not have access to the production, and second thing is the business using a false on the production without their raw version. direction."
+    },
+    {
+      "turn": 35,
+      "speaker": "Kovi AI",
+      "text": "That's a reasonable answer on not updating production directly. But let me test your understanding more concretely: if you had to verify in a test environment that an invoice was successfully released, what specific columns in the AP_INVOICES table would you check in your SELECT query to confirm the hold status was cleared?"
+    },
+    {
+      "turn": 36,
+      "speaker": "Candidate",
+      "text": "Select start from a bin versus where status, where invoice, number is equal to what the invoice number and status is not involved."
+    },
+    {
+      "turn": 37,
+      "speaker": "Kovi AI",
+      "text": "Thank you, Candidate_122. I appreciate you walking through those Oracle Apps and SQL concepts with me today. You've shared your experience with manual testing, your prior work with Selenium and UFT, and your knowledge of Oracle database queries. Thank you for taking the time to speak with me this morning, and we'll be in touch with next steps soon."
+    }
+  ],
+  "evaluations": {
+    "kovi_ai_scores": {
+      "communication": 5.0,
+      "problem_solving": 4.0,
+      "domain_expertise": 4.5,
+      "overall_score": 4.5
+    },
+    "human_panel_scores": {
+      "communication": 4.8,
+      "problem_solving": 4.0,
+      "domain_expertise": 4.2,
+      "overall_score": 4.3,
+      "final_verdict": "NO HIRE",
+      "evaluator_notes": "The candidate has experience in Oracle Apps R12 functional testing and has worked with automation tools like Selenium, UFT and HP ALM. However, her understanding of Oracle SQL, database concepts and automation implementation was not strong enough, and she struggled to explain technical solutions clearly for a Senior QA Test Specialist role."
+    }
+  }
+}
