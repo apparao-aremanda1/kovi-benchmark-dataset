@@ -1,0 +1,150 @@
+{
+  "session_metadata": {
+    "candidate_alias": "Candidate_135",
+    "job_id": "JD-SENENG-7264",
+    "role": "Senior Software Engineer"
+  },
+  "transcript": [
+    {
+      "turn": 1,
+      "speaker": "Kovi AI",
+      "text": "Hi Candidate_135, I am Kovi AI, your AI interviewer today. Let's dive into some technical fundamentals. When you're reviewing a pull request from a junior engineer, what's the first thing you look for and why does that matter more than anything else at that stage?"
+    },
+    {
+      "turn": 2,
+      "speaker": "Candidate",
+      "text": "First, I will check, is going to broke the existing logic. So, the existing functionality is proper implemented, or it's broken up. My concern is, with these new changes, is it going to, whether the new changes is proper implemented, and the second one is, it is going to, broke the existing functionality, and is there any blockers, and is there any education are failing, I will consider these things."
+    },
+    {
+      "turn": 3,
+      "speaker": "Kovi AI",
+      "text": "Got it. So you're checking for regressions and whether new code works correctly. Let me push you on this: imagine you're reviewing code that passes all existing tests, but you notice the new feature adds a database query inside a loop that runs hundreds of times per request. The tests pass, nothing breaks. Do you flag this as a blocker, and if so, how do you explain the risk to the junior engineer in terms they'll understand?"
+    },
+    {
+      "turn": 4,
+      "speaker": "Candidate",
+      "text": "Obviously, it's a blocker. We should not allow to execute an inquiry, a lot of number of times. I mean, millions of million number of times. They should be a proper check for that one. And bad news, bad thing is that won't be identified in the unit cases. So, with the review, we should tell them that what is in bed of this change and how to avoid the change. We have to we should create a comment on that and we should ask them to rework on it. So that's what I will do."
+    },
+    {
+      "turn": 5,
+      "speaker": "Kovi AI",
+      "text": "Right, so you'd catch it in review because unit tests won't expose it. But here's the practical problem: the junior says \"my unit tests all pass, so technically this meets the requirements.\" How do you convince them this is actually a production issue without just saying \"trust me, it's slow\"? What specific evidence or test would you ask them to run?"
+    },
+    {
+      "turn": 6,
+      "speaker": "Candidate",
+      "text": "Maybe I prefer to go with the integration tests and I will say that what is the latency period. If the number of requests gets increased and I will explain that maybe with the local environment itself, we will create a 100 requests and so how these requests will, how these requests will get, because it is expected in the production. in the production we can expect a lot of number of requests and we'll try to create a simulator same situation here and I will explain that so if the huge number of requests flow under the connection pool we'll get exhausted and the system will get crashed. So before executing the phone I will ask them to put some log statement I mean before the query execution I will put some log statement about the DB query call and after the for the income and I will explain them when the request guard increased the number of request integration request got increased how the time got the execution time got increased and how the latency got increased. So I will explain these things and I will show how the system will crash so that's what I will explain to you."
+    },
+    {
+      "turn": 7,
+      "speaker": "Kovi AI",
+      "text": "That's a solid practical approach with load testing and logging. Let me test your thinking on this: you've got those logs showing the query is firing hundreds of times. The junior asks, \"okay, but why not just increase the connection pool size to handle it?\" What's your answer, and what's the real underlying issue they're missing?"
+    },
+    {
+      "turn": 8,
+      "speaker": "Candidate",
+      "text": "We can't increase the support of our pool length because of..."
+    },
+    {
+      "turn": 9,
+      "speaker": "Kovi AI",
+      "text": "Go ahead, finish that thought. Why can't you just increase the connection pool?"
+    },
+    {
+      "turn": 10,
+      "speaker": "Candidate",
+      "text": "(Candidate was silent or audio was unclear)"
+    },
+    {
+      "turn": 11,
+      "speaker": "Kovi AI",
+      "text": "No problem, let me rephrase. If you increase the connection pool size to handle those hundred queries per request, what actually happens to your database server and your system resources over time as traffic grows?"
+    },
+    {
+      "turn": 12,
+      "speaker": "Candidate",
+      "text": "Actually, the connection, database connections are heavy. I suppose if you increase the number of connections more than the available top-roaster size. So what happens is in the various level, it might use some different types of different types of allocation to the request. So it can be run-over-obhenry. It can be something some other approaches are there. So if the number of connection pools are more mean, so the OS is trying to allocate the time to the specific connection and once it got allocated within the short period, it has allocated the new connection. So the data that DP got exhausted and it won't perform any operation. It's simply looping through the connection allocation and trying to execute that one and trying to reallocate the connection to the another pool object, something like that. So it will happen. So the database got exhausted and it will get crashed."
+    },
+    {
+      "turn": 13,
+      "speaker": "Kovi AI",
+      "text": "Good, you're getting at resource exhaustion. But let me ask you this directly: in that loop scenario we discussed earlier, what's the actual root cause fix? Not a workaround like bigger pools, but the real solution. What should the junior engineer actually change in their code?"
+    },
+    {
+      "turn": 14,
+      "speaker": "Candidate",
+      "text": "We should keep that up."
+    },
+    {
+      "turn": 15,
+      "speaker": "Kovi AI",
+      "text": "Keep what up? I need you to be specific. What exact code change should they make to fix the loop problem?"
+    },
+    {
+      "turn": 16,
+      "speaker": "Candidate",
+      "text": "I'm going to go to the hotel. I'm going to go to the hotel."
+    },
+    {
+      "turn": 17,
+      "speaker": "Kovi AI",
+      "text": "I think there might be an audio issue. Let me rephrase: in the loop where the database query runs hundreds of times, what's the code-level fix? Should they batch the queries, move the query outside the loop, or something else? What's your recommendation?"
+    },
+    {
+      "turn": 18,
+      "speaker": "Candidate",
+      "text": "I will ask them to remove the update statement from the loop and I will ask them to keep that one. I will ask them to keep that updated values in the loop and I will try to execute the... in the... sorry. I will ask them to keep that updated values in the list in the... in the... Once it got executed, I will now use the M2-Commitator Save it. So with this way, we can save the time and we have a complete idea on how many times that the number of times that we are updating the list. So we can achieve that with this logic."
+    },
+    {
+      "turn": 19,
+      "speaker": "Kovi AI",
+      "text": "Okay, so you're suggesting batch updates instead of individual queries in the loop. That makes sense. Now, let me ask you this: when you're implementing that batch update, what specific testing strategy would you require the junior engineer to add to prove this refactored code doesn't introduce data consistency issues or race conditions?"
+    },
+    {
+      "turn": 20,
+      "speaker": "Candidate",
+      "text": "I will check the data transaction test and for the race conditions, I will use the... I will use the... what we call it as... We will see the difference and we will give the some bound outside bounded values. And we will make sure that none of the data will get updated. Or so something like that. And for the race conditions, we will use the countdown latch by invoking the concurrent request at the time. And how it is operating, we will verify that one."
+    },
+    {
+      "turn": 21,
+      "speaker": "Kovi AI",
+      "text": "Good, you mentioned countdown latch for concurrent testing. Let me push on this: if you're running concurrent requests with countdown latch and you detect a race condition in that test, how do you know whether the bug is in the batch update logic itself, or whether it's a test isolation issue where requests are interfering with each other's data?"
+    },
+    {
+      "turn": 22,
+      "speaker": "Candidate",
+      "text": "Thank you. What I found which type of race was that I can still be security in bigger than one. But we are like a visa fee. Obviously they are what we do in the previous 10 times of the screen, the architecture and the tools, the own presenter. I'm going back. I'm going back. I'm going back. The Vice President will be in the space of a day. Ladies and gentlemen, I wish you a great time. May I be there with you? All right, listen to me. Wait a minute. Thank you. Members, I'm going back. I can't. Happy to see you. Merry Christmas to you. Merry Christmas. A great time."
+    },
+    {
+      "turn": 23,
+      "speaker": "Kovi AI",
+      "text": "I think we're experiencing some audio difficulty. Let me refocus. We've covered code review and testing. Let me move to system design. You're designing a service that needs to handle millions of requests per second with strict latency requirements. Walk me through your top three architectural decisions and why you'd make each one."
+    },
+    {
+      "turn": 24,
+      "speaker": "Candidate",
+      "text": "We called that, be ready. We called that, be ready. We called it, we had interviews. We called it, be, God. We?, via, how you, I want to turn to the top?"
+    },
+    {
+      "turn": 25,
+      "speaker": "Kovi AI",
+      "text": "I apologize for the audio issues we're experiencing. Given the technical difficulties and the time constraints of this interview, let me wrap up here. Candidate_135, we've covered some solid ground on code review practices, testing strategies, and touched on system design thinking. You demonstrated practical knowledge around performance bottlenecks, batch processing, and concurrent testing approaches. Thank you for your time today, and I wish you the best with your interview process."
+    }
+  ],
+  "evaluations": {
+    "kovi_ai_scores": {
+      "communication": 5.0,
+      "problem_solving": 6.5,
+      "domain_expertise": 7.0,
+      "overall_score": 6.2
+    },
+    "human_panel_scores": {
+      "communication": 5.1,
+      "problem_solving": 6.8,
+      "domain_expertise": 7.1,
+      "overall_score": 6.3,
+      "final_verdict": "NO HIRE",
+      "evaluator_notes": "The candidate have good knowledge in code review and explained things like batch updates and connection pool issues properly. However, because of incomplete system design discussion for handling massive scale, we are giving no hire."
+    }
+  }
+}
