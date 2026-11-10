@@ -1,0 +1,370 @@
+{
+  "session_metadata": {
+    "candidate_alias": "Candidate_139",
+    "job_id": "JD-AITRAINER-7429",
+    "role": "AI Training Expert / Backend Software Engineer"
+  },
+  "transcript": [
+    {
+      "turn": 1,
+      "speaker": "Kovi AI",
+      "text": "Hi Candidate_139, I am Kovi AI, your AI interviewer today. Let's dive into a technical deep dive for the AI Training Expert and Backend Software Engineer role. To start, which of these languages do you work with most frequently in production environments, and can you walk me through a recent scenario where you had to optimize performance in that language?"
+    },
+    {
+      "turn": 2,
+      "speaker": "Candidate",
+      "text": "On our actual I work with Python and Java."
+    },
+    {
+      "turn": 3,
+      "speaker": "Kovi AI",
+      "text": "Got it, Python and Java are your main production languages. Let me dig into Python first since it's commonly used for AI training work. Can you describe a specific performance bottleneck you encountered in Python code and how you identified and fixed it?"
+    },
+    {
+      "turn": 4,
+      "speaker": "Candidate",
+      "text": "I don't know, can you elaborate it?"
+    },
+    {
+      "turn": 5,
+      "speaker": "Kovi AI",
+      "text": "Sure, let me make this concrete. Think about a time when Python code you wrote was running slower than expected, maybe processing data or training a model. How did you figure out what was causing the slowness, and what did you change to make it faster?"
+    },
+    {
+      "turn": 6,
+      "speaker": "Candidate",
+      "text": "Actually, we can check this period of the system using the C profile. We can capture the view which only which statements are taking the long time. We can get that one using the C profile. And in my situation, so while I'm trying to fetch the real-time data used to get it used in the other requests, and it's a synchronous call. waiting for most of the time the thread is waiting to receive the response. So the execution application got so strong. So the further resolution I used a CK-1 or the CK-1 for that one."
+    },
+    {
+      "turn": 7,
+      "speaker": "Kovi AI",
+      "text": "I hear you mentioning cProfile for profiling and that you identified a blocking I/O issue with synchronous calls waiting for responses. When you switched to handle this asynchronously, what specific Python library or pattern did you actually use to make those fetch calls non-blocking, and why did you pick that approach over alternatives?"
+    },
+    {
+      "turn": 8,
+      "speaker": "Candidate",
+      "text": "We use the async i I mean, use it to change it to the asynchronous. We can, that's the easy way to involve the hours synchronously."
+    },
+    {
+      "turn": 9,
+      "speaker": "Kovi AI",
+      "text": "Okay, so you used async and await. Let me get specific here: when you converted that synchronous fetch to async, did you also need to change the underlying HTTP client library you were using, or did your existing library already support async operations? What was actually calling the network request?"
+    },
+    {
+      "turn": 10,
+      "speaker": "Candidate",
+      "text": "I did not understand the question. Can you repeat please?"
+    },
+    {
+      "turn": 11,
+      "speaker": "Kovi AI",
+      "text": "Sure, let me simplify. When you made those fetch calls async using async and await, what Python library did you use to actually make the HTTP request? Was it requests, httpx, aiohttp, or something else?"
+    },
+    {
+      "turn": 12,
+      "speaker": "Candidate",
+      "text": "If I remember correctly, I used to hear a"
+    },
+    {
+      "turn": 13,
+      "speaker": "Kovi AI",
+      "text": "You started to say something but trailed off. Take your time, what library did you use for the HTTP requests?"
+    },
+    {
+      "turn": 14,
+      "speaker": "Candidate",
+      "text": "Actually, I used AI-O HDTP."
+    },
+    {
+      "turn": 15,
+      "speaker": "Kovi AI",
+      "text": "Got it, aiohttp. So you switched from a synchronous HTTP client to aiohttp for async requests. Now here's the practical question: if one of those async requests to fetch real-time data times out or fails, how did you handle the retry logic, and did you use any built-in aiohttp features or write custom code for that?"
+    },
+    {
+      "turn": 16,
+      "speaker": "Candidate",
+      "text": "We implemented a custom code for that one. Actually, we retried it and the retry, we retried it for three times and the gap between the types also will change it. First, I want one second and second and two times something like that we implemented."
+    },
+    {
+      "turn": 17,
+      "speaker": "Kovi AI",
+      "text": "So you built exponential backoff manually with retries at one second, then two seconds. Did you handle the case where all three retries fail, and if so, what does your code do at that point - does it return an error to the caller, queue the request, or something else?"
+    },
+    {
+      "turn": 18,
+      "speaker": "Candidate",
+      "text": "It depends on the application requirement and most of the cases we send the there are necessary to recover."
+    },
+    {
+      "turn": 19,
+      "speaker": "Kovi AI",
+      "text": "I need to understand your actual implementation here. In your specific case with that real-time data fetching, when all retries exhausted and failed, what did your code actually return or do? Did you throw an exception, return null, log and continue, or something different?"
+    },
+    {
+      "turn": 20,
+      "speaker": "Candidate",
+      "text": "Actually, it is throwing an exception and we are passing the error message to the caller. So I can say it's an exception message to the caller. And in some cases, like suppose we get a case where we are saying, mailings are not failed. So in such a scenario, so we just push it into the queue and later on. the countries of the two got a review and the actual navigation bot in the work. That means we'll ask that for it doesn't give in to you."
+    },
+    {
+      "turn": 21,
+      "speaker": "Kovi AI",
+      "text": "Alright, so exceptions for hard failures and a queue for certain recoverable scenarios. Let me shift to Java now since that's your other main language. In Java, when you're building backend services that handle concurrent requests, what's your approach to thread management - do you use thread pools, virtual threads, or something else, and why?"
+    },
+    {
+      "turn": 22,
+      "speaker": "Candidate",
+      "text": "Oh, which one takes out the something else? It's a difficult question."
+    },
+    {
+      "turn": 23,
+      "speaker": "Kovi AI",
+      "text": "Fair enough, let me make it simpler. In Java, when you need to handle multiple requests coming in at the same time, what do you actually use in your code - ExecutorService, Thread pools, or do you let the framework handle it for you?"
+    },
+    {
+      "turn": 24,
+      "speaker": "Candidate",
+      "text": "I'll use the virtual threads for the scenario."
+    },
+    {
+      "turn": 25,
+      "speaker": "Kovi AI",
+      "text": "Virtual threads - that's the newer Java approach. Can you explain what problem virtual threads solve compared to traditional thread pools, and in what scenario would you actually choose virtual threads over a regular ExecutorService?"
+    },
+    {
+      "turn": 26,
+      "speaker": "Candidate",
+      "text": "Actually, that is the basic problem of threat tools and these executive studies. Actually, the JVM itself handles how many threats that are supported and is going to take care of the management of the threats. So it is a lightweight and easy to handle it, compared with the executor's agree."
+    },
+    {
+      "turn": 27,
+      "speaker": "Kovi AI",
+      "text": "That's the general idea. Now here's a concrete question: if you have a virtual thread that's blocked waiting for a database query to complete, does the JVM automatically pause that thread and let another virtual thread run, or does the entire carrier thread get blocked?"
+    },
+    {
+      "turn": 28,
+      "speaker": "Candidate",
+      "text": "Actually, it won't be weighted, actually. It will be the entire carrier. I mean, another, it will take the, another, another task. Another activity."
+    },
+    {
+      "turn": 29,
+      "speaker": "Kovi AI",
+      "text": "I need clarity here - are you saying the carrier thread will switch to another virtual thread when one is blocked, or will the carrier thread itself get blocked? Which one actually happens?"
+    },
+    {
+      "turn": 30,
+      "speaker": "Candidate",
+      "text": "It will switch to another one, I think."
+    },
+    {
+      "turn": 31,
+      "speaker": "Kovi AI",
+      "text": "Okay. Let me test this with a real scenario: you have ten virtual threads, each doing a blocking JDBC database query with no async driver. What actually happens to those threads and the carrier threads underneath?"
+    },
+    {
+      "turn": 32,
+      "speaker": "Candidate",
+      "text": "Suppose if we have the 10 threads and all of them are requesting some JDBC operation JDBC activity. So all of them are good waiting period. So during this waiting period these virtual thread will pick the another service activity and it will process and it will process them. only that sorry it will be implemented."
+    },
+    {
+      "turn": 33,
+      "speaker": "Kovi AI",
+      "text": "I need to push back here - JDBC is a blocking operation. If you have ten virtual threads all doing blocking JDBC calls simultaneously, they don't magically become non-blocking just because they're virtual threads. What actually happens to those carrier threads in that scenario?"
+    },
+    {
+      "turn": 34,
+      "speaker": "Candidate",
+      "text": "I think it will take the, it will completely, I mean, it will push that state into the, it will have into the queue and then it will go for the another activity to perform. Suppose if there is another request comes up, it will handle the request."
+    },
+    {
+      "turn": 35,
+      "speaker": "Kovi AI",
+      "text": "Let me be direct: with ten virtual threads all doing blocking JDBC calls at the same time, all ten carrier threads get blocked too - there's no magic. Virtual threads help with context switching overhead, not blocking I/O. Do you see the distinction, or should we move on to another topic?"
+    },
+    {
+      "turn": 36,
+      "speaker": "Candidate",
+      "text": "Yeah, I see the distinction. So it won't be blocked and it will switch the context."
+    },
+    {
+      "turn": 37,
+      "speaker": "Kovi AI",
+      "text": "Actually, I just said the opposite - they WILL be blocked. Virtual threads don't solve blocking I/O like JDBC. You'd need async drivers or reactive frameworks for that. Let's move forward. In Java, when you need to handle blocking database calls efficiently, what patterns or libraries have you actually used in production?"
+    },
+    {
+      "turn": 38,
+      "speaker": "Candidate",
+      "text": "Actually, we will use the HECARI Cp in this kind of situations. So, it won't block and that will manage the whole very effectively."
+    },
+    {
+      "turn": 39,
+      "speaker": "Kovi AI",
+      "text": "You mentioned HikariCP - that's a connection pooling library. HikariCP manages database connections efficiently, but it doesn't make JDBC calls non-blocking. If you have a hundred concurrent requests and only ten database connections in the pool, what happens to the other ninety requests while they wait for a connection?"
+    },
+    {
+      "turn": 40,
+      "speaker": "Candidate",
+      "text": "Actually, those 90 requests will be blocked. And if these are blocked for a certain specific time, the Hiccup will lose a very fast time, it will throw the netter. So that's how it was implemented."
+    },
+    {
+      "turn": 41,
+      "speaker": "Kovi AI",
+      "text": "Right, so they queue and timeout. That makes sense for connection pooling. Now let's shift gears - of the languages we haven't covered yet, which one have you actually worked with: Rust, Go, C++, or TypeScript?"
+    },
+    {
+      "turn": 42,
+      "speaker": "Candidate",
+      "text": "Actually, I have idea on Java and Python. I did not work on this technologies."
+    },
+    {
+      "turn": 43,
+      "speaker": "Kovi AI",
+      "text": "Got it, so you haven't worked with Rust, Go, C++, or TypeScript in production. Let me circle back to Python and Java then. In Python, when you're building an AI training backend, have you had to deal with memory management issues, and if so, how did you approach them?"
+    },
+    {
+      "turn": 44,
+      "speaker": "Candidate",
+      "text": "Memory management means, can you elaborate it please?"
+    },
+    {
+      "turn": 45,
+      "speaker": "Kovi AI",
+      "text": "Sure. When you run large Python processes, especially for training or processing big datasets, Python can use a lot of RAM. Have you ever hit memory limits, seen your process crash, or had to optimize memory usage in your Python code? What did you actually do?"
+    },
+    {
+      "turn": 46,
+      "speaker": "Candidate",
+      "text": "We prefer lazy loading also probably that is our solution."
+    },
+    {
+      "turn": 47,
+      "speaker": "Kovi AI",
+      "text": "Lazy loading helps. Can you give me a concrete example - what were you lazy loading, and how did you implement it? Was it loading data in batches, using generators, or something else?"
+    },
+    {
+      "turn": 48,
+      "speaker": "Candidate",
+      "text": "Yeah, I will note the data in the batches, so that's a solution. After I'm going to run the once the batch got retrieved, we'll process it and then once it is done, we'll go for the next batch."
+    },
+    {
+      "turn": 49,
+      "speaker": "Kovi AI",
+      "text": "That's batch processing with generators essentially. When you're loading batches, how do you decide the batch size - is it hardcoded, configurable, or do you calculate it based on available memory?"
+    },
+    {
+      "turn": 50,
+      "speaker": "Candidate",
+      "text": "It's a configurable one and based on the hardware based on the systems that we are using it will configure it."
+    },
+    {
+      "turn": 51,
+      "speaker": "Kovi AI",
+      "text": "Makes sense. Now let me ask about error handling in your batch processing pipeline - if processing one batch fails midway, what happens to the data already processed in previous batches, and how do you recover?"
+    },
+    {
+      "turn": 52,
+      "speaker": "Candidate",
+      "text": "Actually, I'm saving data or resulting to the status application in the post- SQL whenever there is a problem. We will retrieve it from the same state. So that's why it was implemented."
+    },
+    {
+      "turn": 53,
+      "speaker": "Kovi AI",
+      "text": "So you checkpoint progress to PostgreSQL. When you restart after a failure, how do you know exactly which batch to start from - do you query the last successful batch ID, or do you have a separate checkpoint table tracking progress?"
+    },
+    {
+      "turn": 54,
+      "speaker": "Candidate",
+      "text": "Yeah, maintaining the bad JD is the bad JD or is a better option."
+    },
+    {
+      "turn": 55,
+      "speaker": "Kovi AI",
+      "text": "Okay, tracking batch ID makes sense. Let me ask about Java one more time since we're running short on time. When you're writing Java backend code, do you use any specific frameworks like Spring, Quarkus, or something else, and what's your experience with dependency injection?"
+    },
+    {
+      "turn": 56,
+      "speaker": "Candidate",
+      "text": "Yeah, I used a Spring run. A Dependence in the injection is mean so it's simply nothing but whenever there is a dependencies there, then only inject the dependency objects. So that's how it was implemented. Instead of losing all the instead of loading all the objects before it gets started, we will load it whenever there is a requirement."
+    },
+    {
+      "turn": 57,
+      "speaker": "Kovi AI",
+      "text": "That's lazy initialization through dependency injection. In Spring, when you mark a bean as lazy, does it get instantiated when the application starts, or only when it's first requested?"
+    },
+    {
+      "turn": 58,
+      "speaker": "Candidate",
+      "text": "It's only when it first went pasted."
+    },
+    {
+      "turn": 59,
+      "speaker": "Kovi AI",
+      "text": "Right. Now here's a practical edge case: you have a lazy bean that throws an exception during initialization. When does that exception actually get thrown - at startup or when someone first tries to use it?"
+    },
+    {
+      "turn": 60,
+      "speaker": "Candidate",
+      "text": "When it, when it first tried to use it."
+    },
+    {
+      "turn": 61,
+      "speaker": "Kovi AI",
+      "text": "Exactly. So if that exception happens in production when a request needs it, your user gets the error, not your startup logs. Have you dealt with that scenario, and if so, how did you handle it?"
+    },
+    {
+      "turn": 62,
+      "speaker": "Candidate",
+      "text": "Actually, whenever there is an error, we are logging it and we'll maintain a fail first approach here. We're supposed to have to have a of course, if that varies of mandatory further application processing."
+    },
+    {
+      "turn": 63,
+      "speaker": "Kovi AI",
+      "text": "I understand you log it and handle mandatory versus optional beans differently. Let me ask directly: if a mandatory bean fails on first use, does your application have a fallback, or does that request just fail?"
+    },
+    {
+      "turn": 64,
+      "speaker": "Candidate",
+      "text": "In my application, we set it as a fail only, if I remember correctly."
+    },
+    {
+      "turn": 65,
+      "speaker": "Kovi AI",
+      "text": "So mandatory beans that fail will cause the request to fail. That's a design choice. We're running low on time now, so let me ask one final question: across Python and Java, which language do you find easier to debug complex issues in production, and why?"
+    },
+    {
+      "turn": 66,
+      "speaker": "Candidate",
+      "text": "I think Python is the easy one or to debug in the production. Because it's easy to understand and maybe the complexity level is low compared with the Java."
+    },
+    {
+      "turn": 67,
+      "speaker": "Kovi AI",
+      "text": "Fair point. Candidate_139, we're at the end of our time together. Thank you for walking through your Python async patterns, Java threading, batch processing, and Spring dependency injection with me. I appreciate you engaging with the technical questions, especially when I pushed back on some concepts. Best of luck with your interview process."
+    },
+    {
+      "turn": 68,
+      "speaker": "Candidate",
+      "text": "(Candidate was silent or audio was unclear)"
+    },
+    {
+      "turn": 69,
+      "speaker": "Kovi AI",
+      "text": "Alright, that concludes our technical deep dive interview. Thank you for your time today, Candidate_139. Take care."
+    }
+  ],
+  "evaluations": {
+    "kovi_ai_scores": {
+      "communication": 7.0,
+      "problem_solving": 5.0,
+      "domain_expertise": 5.0,
+      "overall_score": 5.7
+    },
+    "human_panel_scores": {
+      "communication": 7.0,
+      "problem_solving": 5.0,
+      "domain_expertise": 5.0,
+      "overall_score": 5.7,
+      "final_verdict": "NO HIRE",
+      "evaluator_notes": "The candidate have good communication skills and explained Python async features well, but he got confused about Java virtual threads and blocking JDBC calls. Because his technical depth in backend concurrency and problem-solving was not strong enough for the role."
+    }
+  }
+}
