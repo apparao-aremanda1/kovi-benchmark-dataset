@@ -1,0 +1,170 @@
+{
+  "session_metadata": {
+    "candidate_alias": "Candidate_145",
+    "job_id": "JD-AI-7284",
+    "role": "AI Engineer"
+  },
+  "transcript": [
+    {
+      "turn": 1,
+      "speaker": "Kovi AI",
+      "text": "Hi Candidate_145, I am Kovi AI, your AI interviewer today. Let's dive into a design challenge. Imagine you need to build a multi-turn conversational AI system where users can upload documents, ask questions about them, and the system retrieves relevant context from those documents to generate accurate responses. How would you architect this end-to-end, and which components would you prioritize first?"
+    },
+    {
+      "turn": 2,
+      "speaker": "Candidate",
+      "text": "I think, probably, user has a two activities, either he can do any of them, either he can able to upload with the documents, or he can able to raise the queries. So, we will maintain a sum, also, So whenever there is a supervisor mode, a resource request and it checks to verify whether it is a what kind of request it is. If it is to be there, if it is asking for information, it will send the corresponding work on mode and if it is asking to, if the user is asking the documents upload, we will pass it to the work or not, where it will interact with the pinecone And I mean, where it will split the document into the multiple embeddings and then upload it into the pinecone vector database. So this is what I tell these two other notes can I have been able to contact with the pinecone or the database. I mean, vector database. So that is how I will plan."
+    },
+    {
+      "turn": 3,
+      "speaker": "Kovi AI",
+      "text": "Okay, so you're describing a router that directs upload versus query requests to different workers, with Pinecone handling embeddings. Let me push on this: when you split documents into embeddings and upload to Pinecone, how do you handle metadata association so that when a query retrieves vectors, you can trace back to the original document chunk and its source?"
+    },
+    {
+      "turn": 4,
+      "speaker": "Candidate",
+      "text": "I don't know, maybe I have no idea about it, maybe I have to do some research about it."
+    },
+    {
+      "turn": 5,
+      "speaker": "Kovi AI",
+      "text": "That's fair. Let me reframe: when you retrieve a vector from Pinecone during a query, Pinecone returns the vector ID and a score. How would you design it so that the system knows which document and which section of that document the retrieved vector came from, so you can show the user the actual text?"
+    },
+    {
+      "turn": 6,
+      "speaker": "Candidate",
+      "text": "Maybe we will keep the document with some document ID. So along with the document ID, we will keep that from keep the embedding. So along with the document ID. And if the metadata is finds the reduce the data from many of these embeddings, we can we can retrieve our document ID also. So that's how we can do that."
+    },
+    {
+      "turn": 7,
+      "speaker": "Kovi AI",
+      "text": "Right, so you'd store document ID in the metadata payload when you insert into Pinecone. That makes sense. Now here's the edge case: you have a 50-page PDF. Do you create one embedding per page, one per paragraph, or one per sentence? What's your reasoning, and how does that choice affect latency and retrieval quality when a user asks a question?"
+    },
+    {
+      "turn": 8,
+      "speaker": "Candidate",
+      "text": "I think it's not a pagewise or it's not a sentence. Maybe we will define some size or maybe some specific size for it. And it will retrieve the document for that size of the size only. So that's how it will, I can plan it. some overlapping also something like 60% or 70% and the remaining 30% can be the overlap of the previous one. So that's all I will plan."
+    },
+    {
+      "turn": 9,
+      "speaker": "Kovi AI",
+      "text": "Good, chunking with overlap. That's practical. Now, when you send a query to retrieve relevant chunks from Pinecone, you get back multiple vectors with similarity scores. How do you decide which chunks to actually send to the LLM for context, and what happens if the top-scoring chunk is irrelevant noise or contradicts other chunks?"
+    },
+    {
+      "turn": 10,
+      "speaker": "Candidate",
+      "text": "Actually, I will pass that identified chance, which is the best ranking, tougher ranking. I will send it to the LLM and LLM decide which is the what is the query and what is the what are identified what is the best possible jump for it. So I can follow that approach."
+    },
+    {
+      "turn": 11,
+      "speaker": "Kovi AI",
+      "text": "So you're passing the top-ranked chunks to the LLM and letting it decide. But that's expensive and slow. Why not filter at the retrieval layer first using a similarity threshold before sending to the LLM? And if you do use a threshold, how do you set it, and what happens when no chunks pass that threshold?"
+    },
+    {
+      "turn": 12,
+      "speaker": "Candidate",
+      "text": "With the vector data, we will identify the will do the similarities and the based on the stretch criteria of a new identifier that the top five ranking jumps and will pass only those jumps. Not the intended outcome. So that's how I can, we will do that. So here also I will maintain a threshold for it. And if none of them has made the threshold, maybe I will ask the LLM to rephrase the query again. So I will do the similarities edge. And I will try to identify the tougher chunks or tougher chunks of data again. So that's how I can do that."
+    },
+    {
+      "turn": 13,
+      "speaker": "Kovi AI",
+      "text": "Okay, so you'd re-query with a rephrased prompt if nothing passes the threshold. That's a reasonable fallback. Now let's talk about the full pipeline: when a user submits a query, what's your latency budget end-to-end, and where do you expect the bottlenecks? Walk me through the actual request flow with timing."
+    },
+    {
+      "turn": 14,
+      "speaker": "Candidate",
+      "text": "Once the request comes, I will send it to the LLM and ask for the two kinds of... First, I will use the supervisor work-in-out model. And the supervisor node will decide what kind of request it is. And based on the run, it will pass to the corresponding work-in-out. Now, coming to the deeper level, suppose if the query is something like a retrieval, I will last element to refracing the query again. And after it gets refracing, I will it will pass it to the corresponding, the retrieval workable. Suppose if the query is like a contains the, if the query contains the, I mean, it went to the workable node and it did not find the threshold or I did not make the threshold limit. So I will last the element to it will the corresponding fallback node. will get invoked and we will pass it to the LLM again. I mean, suppose if there is a error message or something, it does not make the threshold mean. So it will go to the supervisor node again. We will reference the query like this. This will repeat it for three times only. So if in this day, if in this three times, I did not find the decrepit expected or result or expected threshold itself, the corresponding file-back method will get in work under corresponding error message will be passed back to the user. So that's how we will plan for the data in session. Now that our request comes to the supervisor and so forth as a no-time supervisor, we'll identify the document and it will have some high level worry whether the document follows the constant like as expected, the immediate document it can be the other jps and signals. So if it is to be other document which we can't process means so we will pass it to the fallback node and send it back to the user. If it is to be a valid document we will pass it to the corresponding work cannot and work cannot will use the open A, L, L, how open A embedding model under corresponding chunk size. So that's all we will chunk the document and we will insert that the retruder document we will keep the document into the vector database. So that's how I can plan and one city successful. The corresponding success message is the success model. We'll get in work and we'll pass to the the success message we passed to the user. So that's how I can plan it. That is a that is the design that I am thinking."
+    },
+    {
+      "turn": 15,
+      "speaker": "Kovi AI",
+      "text": "I appreciate the detailed flow. But you're describing a lot of retry logic and supervisor nodes. Let me cut through the complexity: in your actual implementation, would you use LangGraph for this orchestration, and if so, how would you structure the graph nodes and edges to handle the retry logic and fallbacks you just described?"
+    },
+    {
+      "turn": 16,
+      "speaker": "Candidate",
+      "text": "Yes, I will use the LangGraph only for this one. So, the path is like this. Supervised north and then work on modes. And from the work are not either to the supervised north, again, half of all the web modes. So, that is a process that I'm thinking."
+    },
+    {
+      "turn": 17,
+      "speaker": "Kovi AI",
+      "text": "Right, so you have supervisor routing to workers, and workers can loop back or hit fallback. In LangGraph, how do you actually implement the conditional routing from supervisor to the right worker node? Do you use the router pattern with conditional edges, or something else?"
+    },
+    {
+      "turn": 18,
+      "speaker": "Candidate",
+      "text": "Yeah, I will use the conditional edges only. Depends on the query type. We have a condition and based on that condition only, it will be directed to the work and order. The work and order of either retrieval or work and order for work and order for work and order. We'll insert the chunks of embeddings into the vector database."
+    },
+    {
+      "turn": 19,
+      "speaker": "Kovi AI",
+      "text": "Okay, conditional edges based on query type. Now here's the real test: in your LangGraph implementation, what state do you pass between nodes, and how do you prevent state bloat when you're storing full documents, embeddings, and retrieved chunks across multiple node transitions?"
+    },
+    {
+      "turn": 20,
+      "speaker": "Candidate",
+      "text": "I'm going to keep each and every state into the PostgreSQL, I will be thinking of it. Maybe if there is a possibility of keep that one into the Pinecone, that's okay, but if it is not available, I will keep that state into the PostgreSQL. So whenever there is a bloat in the request process, We can retrieve it from the state where it was a balloon. So I will, for now, I'm thinking about the post-craze skill."
+    },
+    {
+      "turn": 21,
+      "speaker": "Kovi AI",
+      "text": "Hold on. You're saying you'd store LangGraph state in PostgreSQL for retrieval during bloat. But that adds latency and database round trips. Why not keep state in memory within the graph execution and only persist to PostgreSQL for audit or recovery? What's driving your choice to externalize state?"
+    },
+    {
+      "turn": 22,
+      "speaker": "Candidate",
+      "text": "Suppose if the entire not got failed, I mean the supervisor and the entire system got failed. So if we keep that one in the memory means we will lose that state. So that's why it's better to keep that one in the PostgreSQL."
+    },
+    {
+      "turn": 23,
+      "speaker": "Kovi AI",
+      "text": "Fair point on durability. But now you're adding I/O overhead on every node transition. How do you balance that? Do you persist state synchronously after each node, or asynchronously in the background? And if asynchronously, what happens if the system crashes between node completion and the async write?"
+    },
+    {
+      "turn": 24,
+      "speaker": "Candidate",
+      "text": "I told you if you take a synchronous approach, means so probably the latency gets improved. Instinct, suppose if I took synchronous means, might be we are not sure whether the latest got to the DB or not. Even though I can go with the asynchronous state only, but maybe we will use something like some events or triggering events to capture whether it is saved I can do that kind of approach. Otherwise, I will keep that one into the some queues and then we will push it over to is not excusing to the dv."
+    },
+    {
+      "turn": 25,
+      "speaker": "Kovi AI",
+      "text": "Interesting. So you're considering event-driven persistence with queues. Let me push harder: if you use async writes to PostgreSQL via a queue, and the LLM generates a response before the state is persisted, the user sees the answer but the state write fails silently. How do you detect and handle that race condition?"
+    },
+    {
+      "turn": 26,
+      "speaker": "Candidate",
+      "text": "In the queue itself, we will check the, whether that corresponding, the state gets saved on Mark. So if it is not saved, it means we will override one with the low-rated fit to the latest state. So that's what I'm thinking."
+    },
+    {
+      "turn": 27,
+      "speaker": "Kovi AI",
+      "text": "Alright, you're checking acknowledgments in the queue. But here's the concrete issue: the LLM response is already sent to the user. The state write fails. The user refreshes or asks a follow-up. The system has no record of the prior context. How do you recover that conversation thread without the persisted state?"
+    },
+    {
+      "turn": 28,
+      "speaker": "Candidate",
+      "text": "Go! Go! Go! Go, Go! Go! Go! Go! Go! Go! Go! Maybe, yes, here in this case, we don't have the persistence of data. Maybe we will use a suppose if the right can fail. Maybe we can trigger it. we can re-we can try to write it again or maybe one or two bands. I don't know why they have Thank you very much."
+    },
+    {
+      "turn": 29,
+      "speaker": "Kovi AI",
+      "text": "Thank you, Candidate_145. I appreciate you walking through your design thinking on this conversational AI system with me today. You touched on some solid concepts around chunking, vector retrieval, LangGraph orchestration, and state persistence. Best of luck with your interview process."
+    }
+  ],
+  "evaluations": {
+    "kovi_ai_scores": {
+      "communication": 7.8,
+      "problem_solving": 5.5,
+      "domain_expertise": 6.0,
+      "overall_score": 6.4
+    },
+    "human_panel_scores": {
+      "communication": 7.5,
+      "problem_solving": 5.5,
+      "domain_expertise": 6.0,
+      "overall_score": 6.3,
+      "final_verdict": "No Hire",
+      "evaluator_notes": "The candidate demonstrated a reasonable understanding of RAG pipeline fundamentals, especially document chunking with overlap, vector retrieval using Pinecone, and basic agent orchestration using LangGraph conditional edges. However, his architectural reasoning regarding state management latency and complex race conditions was limited, and he could not demonstrate the expected problem-solving capability when pushed on edge cases like asynchronous database write failures, ultimately failing to provide a recovery solution."
+    }
+  }
+}
